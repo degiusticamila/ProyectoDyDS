@@ -32,4 +32,5 @@ public class PagePresenter {
         searchView.getCurrentSearchTextPane().setText(text);
         searchView.getCurrentSearchTextPane().setCaretPosition(0);
     }
+
 }

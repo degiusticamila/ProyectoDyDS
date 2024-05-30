@@ -35,6 +35,9 @@ public class StorageView extends JPanel implements View {
     public JPanel getStoragePanel(){
         return storagePanel;
     }
+    public JTextPane getSavedSeriesTextPane(){
+        return savedSeriesTextPane;
+    }
    private void createStoragePanel(){
         storagePanel = new JPanel();
     }

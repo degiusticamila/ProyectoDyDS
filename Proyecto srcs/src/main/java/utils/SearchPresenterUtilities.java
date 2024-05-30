@@ -69,4 +69,5 @@ public class SearchPresenterUtilities {
         }
         return text;
     }
+
 }

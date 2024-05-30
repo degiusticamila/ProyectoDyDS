@@ -6,7 +6,7 @@ public class DataBaseModel {
     private ArrayList<ModelListener> dataBaseListeners = new ArrayList<>();
 
     public void saveLocally(){
-        //DataBase.saveInfo(selectedResultTitle.replace("'", "`"), text);  //Dont forget the ' sql problem
+        DataBase.saveInfo(selectedResultTitle.replace("'", "`"), text);  //Dont forget the ' sql problem
         notifySaveLocallyFinished();
     }
     public void addListener(ModelListener listener) {
