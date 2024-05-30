@@ -2,23 +2,23 @@ package view;
 
 import dyds.tvseriesinfo.fulllogic.SearchResult;
 import presenter.PagePresenter;
+import presenter.SavePresenter;
 import presenter.SearchPresenter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
-import java.util.List;
 
 public class SearchView extends JPanel implements View{
     private JTextField seriesToSearchTextField;
     private JButton goSearchButton;
     private JTextPane currentSearchTextPane;
     private JPanel searchPanel;
-    private JTextPane savedSeriesTextPane;
     private JPopupMenu searchOptionsMenu;
-    private JPopupMenu storedInfoPopup;
     private SearchPresenter searchPresenter;
     private PagePresenter pagePresenter;
+    private SavePresenter savePresenter;
+    private JButton saveLocallyButton;
     private LinkedList<SearchResult> searchResults;
     public SearchView(){
         initListeners();
@@ -34,6 +34,7 @@ public class SearchView extends JPanel implements View{
         searchPanel.add(seriesToSearchTextField);
         searchPanel.add(goSearchButton);
         searchPanel.add(currentSearchTextPane);
+        searchPanel.add(saveLocallyButton);
     }
     public JTextField getSeriesToSearchTextField(){
         return seriesToSearchTextField;
@@ -50,10 +51,8 @@ public class SearchView extends JPanel implements View{
     public JPopupMenu getPopupMenu(){
         return searchOptionsMenu;
     }
-    //se crea en ejecucion
     public void createJPopMenu(){
         searchOptionsMenu = new JPopupMenu("Search Results");
-
     }
     public void showInfoPopup(){
         searchOptionsMenu.show(seriesToSearchTextField, seriesToSearchTextField.getX(), seriesToSearchTextField.getY());
@@ -62,13 +61,16 @@ public class SearchView extends JPanel implements View{
     private void initListeners(){
         initializeSeriesToSearchTextField();
         initializeGoSearchButton();
-        //initializeSearchResultsPopup();
+        initializeSaveLocallyButton();
     }
-    public void setSearchPresenter(SearchPresenter sp){
-        searchPresenter = sp;
+    public void setSearchPresenter(SearchPresenter searchPresenter){
+        this.searchPresenter = searchPresenter;
     }
-    public void setPagePresenter(PagePresenter pp){
-        pagePresenter = pp;
+    public void setPagePresenter(PagePresenter pagePresenter){
+        this.pagePresenter = pagePresenter;
+    }
+    public void setSavePresenter(SavePresenter savePresenter){
+        this.savePresenter = savePresenter;
     }
     public void setWorkingStatus() {
         for (Component c : searchPanel.getComponents()) {
@@ -79,6 +81,9 @@ public class SearchView extends JPanel implements View{
     public void setWatingStatus () {
         for (Component c : searchPanel.getComponents()) c.setEnabled(true);
         currentSearchTextPane.setEnabled(true);
+    }
+    public void createSaveLocallyButton(){
+        saveLocallyButton = new JButton();
     }
     public void createSearchResultList(){
         searchResults = new LinkedList<SearchResult>();
@@ -105,6 +110,11 @@ public class SearchView extends JPanel implements View{
             searchPresenter.onEventClickedGoButtonToSearch();
 
             //el taskThread deberia declararse aca? pq me falta el action listener del jpopup
+        });
+    }
+    private void initializeSaveLocallyButton(){
+        saveLocallyButton.addActionListener(actionEvent ->{
+            savePresenter.onEventSaveLocallyButton();
         });
     }
 }

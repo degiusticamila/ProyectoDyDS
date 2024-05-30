@@ -11,23 +11,27 @@ import java.awt.*;
 
 public class GeneralView extends JFrame {
     public SearchView searchView;
+    public StorageView storageView;
+    public ScoreView scoreView;
     private JTabbedPane generalTabbedPane;
     //private JPanel generalContentPane;
 
-    public GeneralView(SearchView searchView){
-        //generalContentPane = new JPanel();
-        generalTabbedPane = new JTabbedPane();
+    public GeneralView(SearchView searchView, StorageView storageView, ScoreView scoreView){
 
-        //generalContentPane.add(generalTabbedPane);
-        //add(searchView.getSearchPanel());
-        add(generalTabbedPane);
+        createGeneralTabbedPane();
         generalTabbedPane.add("Search in Wikipedia", searchView.getSearchPanel());
+        generalTabbedPane.add("Stored Info", storageView.getStoragePanel());
+        generalTabbedPane.add("Series Score",scoreView.getScorePanel());
 
         setTitle("TV Series Info Repo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600); // Define el tamaño de la ventana
         setLocationRelativeTo(null); // Centra la ventana en la pantalla
 
+    }
+    public void createGeneralTabbedPane(){
+        generalTabbedPane = new JTabbedPane();
+        add(generalTabbedPane);
     }
     public JTabbedPane getTabbedPane(){
         return generalTabbedPane;
@@ -55,15 +59,19 @@ public class GeneralView extends JFrame {
             DataBase.saveInfo("test", "sarasa");
 
             SearchView searchView = new SearchView();
-            GeneralView generalView = new GeneralView(searchView);
+            StorageView storageView = new StorageView();
+            ScoreView scoreView = new ScoreView();
+            GeneralView generalView = new GeneralView(searchView,storageView,scoreView);
 
             PageModel pageModel = new PageModel();
             SearchModel searchModel = new SearchModel();
+
             PagePresenter pagePresenter = new PagePresenter(searchView,pageModel);
             SearchPresenter searchPresenter = new SearchPresenter(searchView,searchModel);
 
             searchView.setSearchPresenter(searchPresenter);
             searchView.setPagePresenter(pagePresenter);
+
             generalView.setVisible(true);
         });
     }

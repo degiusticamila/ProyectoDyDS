@@ -48,6 +48,7 @@ public class SearchPresenterUtilities {
     }
     //No esta bueno que reciba tantos parametros.
     public static String calculatePageResults(Response<String> callForPageResponse,SearchResult sr){
+        //poner nombres significativos.
         Gson gson = new Gson();
         String selectedResultTitle = null;
         String text = "";

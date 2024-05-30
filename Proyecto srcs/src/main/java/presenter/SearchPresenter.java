@@ -1,13 +1,11 @@
 package presenter;
 import com.google.gson.JsonArray;
 import dyds.tvseriesinfo.fulllogic.SearchResult;
-import model.PageModel;
 import model.ModelListener;
 import view.SearchView;
 import model.SearchModel;
 import retrofit2.Response;
 import utils.SearchPresenterUtilities;
-
 public class SearchPresenter {
     private SearchView searchView;
     private SearchModel searchModel;
@@ -48,24 +46,4 @@ public class SearchPresenter {
             searchView.getSearchResultList().add(sr);
         }
     }
-
-   /** public void onEventPopupSelected(SearchResult searchResult) {
-        searchModel.addListener(new ModelListener() {
-            @Override
-            public void searchFinished() {
-                showPageResult(searchResult);
-            }
-        });
-        view.setWorkingStatus();
-        pageModel.calculateCallForPageResponse(searchResult);
-        view.setWatingStatus();
-    }
-    **/
-   /** private void showPageResult(SearchResult searchResult){
-        Response<String> lastCallForPageResponse = pageModel.getLastPageResponse();
-        String text = SearchPresenterUtilities.calculatePageResults(lastCallForPageResponse,searchResult);
-        view.getCurrentSearchTextPane().setText(text);
-        view.getCurrentSearchTextPane().setCaretPosition(0);
-    }
-    **/
 }
