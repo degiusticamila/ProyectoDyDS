@@ -1,6 +1,7 @@
 package view;
 
 import dyds.tvseriesinfo.fulllogic.SearchResult;
+import presenter.PagePresenter;
 import presenter.SearchPresenter;
 
 import javax.swing.*;
@@ -13,17 +14,16 @@ public class SearchView extends JPanel implements View{
     private JButton goSearchButton;
     private JTextPane currentSearchTextPane;
     private JPanel searchPanel;
-
     private JTextPane savedSeriesTextPane;
     private JPopupMenu searchOptionsMenu;
     private JPopupMenu storedInfoPopup;
     private SearchPresenter searchPresenter;
+    private PagePresenter pagePresenter;
     private LinkedList<SearchResult> searchResults;
     public SearchView(){
         initListeners();
         initComponents();
         showView();
-
     }
     public void showView(){
         searchPanel.setVisible(true);
@@ -50,31 +50,25 @@ public class SearchView extends JPanel implements View{
     public JPopupMenu getPopupMenu(){
         return searchOptionsMenu;
     }
-
     //se crea en ejecucion
-    public void createStoredInfoPopup(){
-        storedInfoPopup = new JPopupMenu();
-    }
     public void createJPopMenu(){
         searchOptionsMenu = new JPopupMenu("Search Results");
 
     }
-    private void initListeners(){
-        seriesToSearchTextField.addActionListener(actionEvent -> {
-            searchPresenter.onEventClickedGoButtonToSearch();
-        });
-        goSearchButton.addActionListener(actionEvent ->{
-            searchPresenter.onEventClickedGoButtonToSearch();
-
-            //el taskThread deberia declararse aca? pq me falta el action listener del jpopup
-        });
+    public void showInfoPopup(){
+        searchOptionsMenu.show(seriesToSearchTextField, seriesToSearchTextField.getX(), seriesToSearchTextField.getY());
         initializeSearchResultsPopup();
+    }
+    private void initListeners(){
+        initializeSeriesToSearchTextField();
+        initializeGoSearchButton();
+        //initializeSearchResultsPopup();
     }
     public void setSearchPresenter(SearchPresenter sp){
         searchPresenter = sp;
     }
-    public void createSearchResult(){
-
+    public void setPagePresenter(PagePresenter pp){
+        pagePresenter = pp;
     }
     public void setWorkingStatus() {
         for (Component c : searchPanel.getComponents()) {
@@ -92,12 +86,25 @@ public class SearchView extends JPanel implements View{
     public LinkedList<SearchResult> getSearchResultList(){
         return searchResults;
     }
+    private void initializeSeriesToSearchTextField(){
+        seriesToSearchTextField.addActionListener(actionEvent -> {
+            searchPresenter.onEventClickedGoButtonToSearch();
+        });
+    }
     private void initializeSearchResultsPopup(){
         for(SearchResult sr : searchResults){
             sr.addActionListener(actionEvent -> {
-                searchPresenter.onEventPopupSelected();
+
+                //cambiar para que sea clean x el parametro.
+                pagePresenter.onEventPopupSelected(sr);
             });
         }
     }
-}
+    private void initializeGoSearchButton(){
+        goSearchButton.addActionListener(actionEvent ->{
+            searchPresenter.onEventClickedGoButtonToSearch();
 
+            //el taskThread deberia declararse aca? pq me falta el action listener del jpopup
+        });
+    }
+}

@@ -1,23 +1,16 @@
 package model;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import dyds.tvseriesinfo.fulllogic.SearchResult;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class SearchModel{
     private WikipediaSearchAPI searchAPI;
     private Response<String> callForSearchResponse;
-    private JsonArray jsonResults;
-    private ArrayList<SearchModelListener> listeners = new ArrayList<>();
+    private ArrayList<ModelListener> listeners = new ArrayList<>();
     public SearchModel(){
         createWikiSearchAPI();
     }
@@ -46,15 +39,13 @@ public class SearchModel{
         return callForSearchResponse;
     }
     private void notifySearchFinishedListener(){
-        for(SearchModelListener l :listeners){
+        for(ModelListener l :listeners){
             l.searchFinished();
-            System.out.println("searchModelListener "+l);
+            System.out.println("ModelListener "+l);
         }
-        //System.out.println("searchModelListener"+searchModelListener);
-        //searchModelListener.searchFinished();
     }
 
-    public void addListener(SearchModelListener listener) {
+    public void addListener(ModelListener listener) {
         this.listeners.add(listener);
     }
 

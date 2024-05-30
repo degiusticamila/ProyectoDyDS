@@ -1,7 +1,9 @@
 package view;
 
 import model.DataBase;
+import model.PageModel;
 import model.SearchModel;
+import presenter.PagePresenter;
 import presenter.SearchPresenter;
 
 import javax.swing.*;
@@ -55,11 +57,14 @@ public class GeneralView extends JFrame {
             SearchView searchView = new SearchView();
             GeneralView generalView = new GeneralView(searchView);
 
+            PageModel pageModel = new PageModel();
             SearchModel searchModel = new SearchModel();
-            SearchPresenter sp = new SearchPresenter(searchView,searchModel);
-            searchView.setSearchPresenter(sp);
+            PagePresenter pagePresenter = new PagePresenter(searchView,pageModel);
+            SearchPresenter searchPresenter = new SearchPresenter(searchView,searchModel);
+
+            searchView.setSearchPresenter(searchPresenter);
+            searchView.setPagePresenter(pagePresenter);
             generalView.setVisible(true);
         });
     }
-
 }

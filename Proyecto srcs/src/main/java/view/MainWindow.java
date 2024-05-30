@@ -50,13 +50,9 @@ public class MainWindow {
 
     seriesComboBox.setModel(new DefaultComboBoxModel(DataBase.getTitles().stream().sorted().toArray()));
 
-
-    //son componentes visuales, debería estar en la View
     currentSearchTextPane.setContentType("text/html");
-    //aca podría separar las vistas pero no me decidi
     savedSeriesTextPane.setContentType("text/html");
     // this is needed to open a link in the browser
-
     seriesToSearchTextField.addActionListener(actionEvent -> {System.out.println("ACCION!!!");});
     System.out.println("TYPED!!!");
     seriesToSearchTextField.addPropertyChangeListener(propertyChangeEvent -> {
@@ -143,8 +139,6 @@ public class MainWindow {
               } catch (IOException e1) {
                 e1.printStackTrace();
               }
-
-              //Now you can keep searching stuff!
               setWatingStatus();
     }).start());
 
@@ -155,7 +149,6 @@ public class MainWindow {
         seriesComboBox.setModel(new DefaultComboBoxModel(DataBase.getTitles().stream().sorted().toArray()));
       }
     });
-
     seriesComboBox.addActionListener(actionEvent -> savedSeriesTextPane.setText(textToHtml(DataBase.getExtract(seriesComboBox.getSelectedItem().toString()))));
 
     JPopupMenu storedInfoPopup = new JPopupMenu();
@@ -179,11 +172,7 @@ public class MainWindow {
     storedInfoPopup.add(saveItem);
 
     savedSeriesTextPane.setComponentPopupMenu(storedInfoPopup);
-
-
   }
-
-
   private void setWorkingStatus() {
     for(Component c: this.searchPanel.getComponents()) c.setEnabled(false);
     currentSearchTextPane.setEnabled(false);
@@ -210,10 +199,7 @@ public class MainWindow {
     catch (Exception e) {
       System.out.println("Something went wrong with UI!");
     }
-
-
     JFrame frame = new JFrame("TV Series Info Repo");
-
 
     frame.setContentPane(new MainWindow().contentPane);
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -221,13 +207,7 @@ public class MainWindow {
     frame.setVisible(true);
 
     DataBase.loadDatabase();
-    DataBase.saveInfo("test", "sarasa");
-
-
-    System.out.println(DataBase.getExtract("test"));
-    System.out.println(DataBase.getExtract("nada"));
   }
-
   public static String textToHtml(String text) {
 
     StringBuilder builder = new StringBuilder();

@@ -1,82 +1,71 @@
 package presenter;
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import dyds.tvseriesinfo.fulllogic.SearchResult;
-import model.SearchModelListener;
+import model.PageModel;
+import model.ModelListener;
 import view.SearchView;
 import model.SearchModel;
 import retrofit2.Response;
 import utils.SearchPresenterUtilities;
-import java.awt.*;
-import java.util.Iterator;
 
 public class SearchPresenter {
-    private SearchView view;
+    private SearchView searchView;
     private SearchModel searchModel;
 
-
-    public SearchPresenter(SearchView view, SearchModel model) {
-        this.view = view;
-        this.searchModel = model;
+    public SearchPresenter(SearchView searchView, SearchModel searchModel) {
+        this.searchView = searchView;
+        this.searchModel = searchModel;
     }
-    // public void initListeners(){
-    //   searchModel.addListener(new SearchModelListener() {
-    //     @Override
-    //   public void searchFinished() {
-    //     showSearchResult();
-    //}
-    //});
-
-    //view.getGoSearchButton().addActionListener(actionEvent ->{
-    //  String termToSearch = view.getSeriesToSearchTextField().getText();
-    //esto deberia estar en la vista y el presenter le pide el textFiel
-    //presenter.onEvent....
-    //onEventClickedGoButtonToSearch(termToSearch);
-    //});
-    // }
-
     public void onEventClickedGoButtonToSearch() {
-        searchModel.addListener(new SearchModelListener() {
+        searchModel.addListener(new ModelListener() {
             @Override
             public void searchFinished() {
                 showSearchResult();
             }
         });
-        String termToSearch = view.getSeriesToSearchTextField().getText();
+        String termToSearch = searchView.getSeriesToSearchTextField().getText();
         Thread taskThread = new Thread(() -> {
-            view.setWorkingStatus();
-            view.getCurrentSearchTextPane().setContentType("text/html");
+            searchView.setWorkingStatus();
+            searchView.getCurrentSearchTextPane().setContentType("text/html");
             searchModel.searchInWikipedia(termToSearch);
-            view.setWatingStatus();
+            searchView.setWatingStatus();
         });
         taskThread.start();
-
     }
     private void showSearchResult() {
         Response<String> lastSearchResponse = searchModel.getLastSearchResponse();
         JsonArray jsonResults = SearchPresenterUtilities.calculateJSonObjects(lastSearchResponse);
-        view.createJPopMenu();
+        searchView.createJPopMenu();
         Iterable<SearchResult> searchResults = SearchPresenterUtilities.calculateSearchResults(jsonResults);
+        searchView.createSearchResultList();
         addSearchResults(searchResults);
-        view.getPopupMenu().show(view.getSeriesToSearchTextField(), view.getSeriesToSearchTextField().getX(), view.getSeriesToSearchTextField().getY());
+        searchView.showInfoPopup();
     }
-    private void addSearchResults(Iterable<SearchResult> searchResults){
-        view.createSearchResultList();
+    public void addSearchResults(Iterable<SearchResult> searchResults){
+        searchView.createSearchResultList();
         for (SearchResult sr : searchResults){
-            view.getPopupMenu().add(sr);
-            view.getSearchResultList().add(sr);
+            searchView.getPopupMenu().add(sr);
+            searchView.getSearchResultList().add(sr);
         }
     }
-    public void onEventPopupSelected() {
-        searchModel.addListener(new SearchModelListener() {
+
+   /** public void onEventPopupSelected(SearchResult searchResult) {
+        searchModel.addListener(new ModelListener() {
             @Override
             public void searchFinished() {
-
+                showPageResult(searchResult);
             }
         });
         view.setWorkingStatus();
-
+        pageModel.calculateCallForPageResponse(searchResult);
+        view.setWatingStatus();
     }
+    **/
+   /** private void showPageResult(SearchResult searchResult){
+        Response<String> lastCallForPageResponse = pageModel.getLastPageResponse();
+        String text = SearchPresenterUtilities.calculatePageResults(lastCallForPageResponse,searchResult);
+        view.getCurrentSearchTextPane().setText(text);
+        view.getCurrentSearchTextPane().setCaretPosition(0);
+    }
+    **/
 }
