@@ -21,7 +21,7 @@ public class SavePresenter {
                 showText();
             }
         });
-        dataBaseModel.saveLocally();
+        //dataBaseModel.saveLocally();
         //update storage view?
     }
     private void showText(){

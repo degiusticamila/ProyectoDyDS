@@ -29,11 +29,7 @@ public class SearchModel{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Trae de la api el termino ");
-        //Una vez que termina de buscar, notifica que termino!
         notifySearchFinishedListener();
-        System.out.println("Notifica al presentador que ya termino");
-
     }
     public Response<String> getLastSearchResponse(){
         return callForSearchResponse;
@@ -44,7 +40,6 @@ public class SearchModel{
             System.out.println("ModelListener "+l);
         }
     }
-
     public void addListener(ModelListener listener) {
         this.listeners.add(listener);
     }

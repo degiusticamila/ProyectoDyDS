@@ -10,6 +10,7 @@ import retrofit2.Response;
 import java.util.*;
 
 public class SearchPresenterUtilities {
+
     public static JsonArray calculateJSonObjects(Response<String> lastSearchResponse){
         Gson gson = new Gson();
         JsonObject jobj = gson.fromJson(lastSearchResponse.body(), JsonObject.class);
@@ -68,6 +69,9 @@ public class SearchPresenterUtilities {
             text = textToHtml(text);
         }
         return text;
+    }
+    public static String getTitleTextToSearch(SearchResult sr){
+        return sr.title;
     }
 
 }

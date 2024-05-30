@@ -38,7 +38,6 @@ public class MainWindow {
   String text = ""; //Last searched text! this variable is central for everything
 
   public MainWindow() {
-
     //MODELO
     Retrofit retrofit = new Retrofit.Builder()
         .baseUrl("https://en.wikipedia.org/w/")

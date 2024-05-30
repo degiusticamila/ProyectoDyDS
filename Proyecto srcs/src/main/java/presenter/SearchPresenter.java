@@ -40,7 +40,7 @@ public class SearchPresenter {
         searchView.showInfoPopup();
     }
     public void addSearchResults(Iterable<SearchResult> searchResults){
-        searchView.createSearchResultList();
+        //searchView.createSearchResultList();
         for (SearchResult sr : searchResults){
             searchView.getPopupMenu().add(sr);
             searchView.getSearchResultList().add(sr);

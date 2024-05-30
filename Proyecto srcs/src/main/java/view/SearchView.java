@@ -10,6 +10,7 @@ import java.awt.*;
 import java.util.LinkedList;
 
 public class SearchView extends JPanel implements View{
+    private SearchResult searchResultActual;
     private JTextField seriesToSearchTextField;
     private JButton goSearchButton;
     private JTextPane currentSearchTextPane;
@@ -54,6 +55,7 @@ public class SearchView extends JPanel implements View{
     public void createJPopMenu(){
         searchOptionsMenu = new JPopupMenu("Search Results");
     }
+
     public void showInfoPopup(){
         searchOptionsMenu.show(seriesToSearchTextField, seriesToSearchTextField.getX(), seriesToSearchTextField.getY());
         initializeSearchResultsPopup();
@@ -99,7 +101,7 @@ public class SearchView extends JPanel implements View{
     private void initializeSearchResultsPopup(){
         for(SearchResult sr : searchResults){
             sr.addActionListener(actionEvent -> {
-
+                searchResultActual = sr;
                 //cambiar para que sea clean x el parametro.
                 pagePresenter.onEventPopupSelected(sr);
             });
@@ -116,5 +118,9 @@ public class SearchView extends JPanel implements View{
         saveLocallyButton.addActionListener(actionEvent ->{
             savePresenter.onEventSaveLocallyButton();
         });
+    }
+    //No se como cambiarlo para que sea clean.
+    public SearchResult getSearchResultActual(){
+        return searchResultActual;
     }
 }

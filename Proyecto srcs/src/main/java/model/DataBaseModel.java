@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class DataBaseModel {
     private ArrayList<ModelListener> dataBaseListeners = new ArrayList<>();
 
-    public void saveLocally(){
+    public void saveLocally(String selectedResultTitle,String text){
         DataBase.saveInfo(selectedResultTitle.replace("'", "`"), text);  //Dont forget the ' sql problem
         notifySaveLocallyFinished();
     }
