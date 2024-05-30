@@ -54,7 +54,6 @@ public class SearchPresenter {
         taskThread.start();
 
     }
-
     private void showSearchResult() {
         Response<String> lastSearchResponse = searchModel.getLastSearchResponse();
         JsonArray jsonResults = SearchPresenterUtilities.calculateJSonObjects(lastSearchResponse);
@@ -64,14 +63,20 @@ public class SearchPresenter {
         view.getPopupMenu().show(view.getSeriesToSearchTextField(), view.getSeriesToSearchTextField().getX(), view.getSeriesToSearchTextField().getY());
     }
     private void addSearchResults(Iterable<SearchResult> searchResults){
+        view.createSearchResultList();
         for (SearchResult sr : searchResults){
             view.getPopupMenu().add(sr);
+            view.getSearchResultList().add(sr);
         }
     }
-
     public void onEventPopupSelected() {
+        searchModel.addListener(new SearchModelListener() {
+            @Override
+            public void searchFinished() {
+
+            }
+        });
+        view.setWorkingStatus();
 
     }
-
-
 }
