@@ -31,6 +31,7 @@ public class SearchView extends JPanel implements View{
     }
     public void initComponents(){
         searchPanel = new JPanel();
+        //createSaveLocallyButton();
         currentSearchTextPane.setPreferredSize(new Dimension(500, 500));
         searchPanel.add(seriesToSearchTextField);
         searchPanel.add(goSearchButton);
@@ -116,6 +117,7 @@ public class SearchView extends JPanel implements View{
     }
     private void initializeSaveLocallyButton(){
         saveLocallyButton.addActionListener(actionEvent ->{
+            System.out.println(savePresenter +" el save presenter no es null");
             savePresenter.onEventSaveLocallyButton();
         });
     }

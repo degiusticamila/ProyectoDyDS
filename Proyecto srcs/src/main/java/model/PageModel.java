@@ -35,7 +35,7 @@ public class PageModel {
     }
     private void notifyPageFinishedListener(){
         for(ModelListener l : pageListeners){
-            l.searchFinished();
+            l.hasFinished();
         }
     }
     public void addListener(ModelListener listener) {

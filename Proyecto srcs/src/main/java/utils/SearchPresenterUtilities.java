@@ -53,11 +53,14 @@ public class SearchPresenterUtilities {
         Gson gson = new Gson();
         String selectedResultTitle = null;
         String text = "";
+
         JsonObject jobj2 = gson.fromJson(callForPageResponse.body(), JsonObject.class);
         JsonObject query2 = jobj2.get("query").getAsJsonObject();
         JsonObject pages = query2.get("pages").getAsJsonObject();
+
         Set<Map.Entry<String, JsonElement>> pagesSet = pages.entrySet();
         Map.Entry<String, JsonElement> first = pagesSet.iterator().next();
+
         JsonObject page = first.getValue().getAsJsonObject();
         JsonElement searchResultExtract2 = page.get("extract");
         if (searchResultExtract2 == null) {
@@ -70,8 +73,4 @@ public class SearchPresenterUtilities {
         }
         return text;
     }
-    public static String getTitleTextToSearch(SearchResult sr){
-        return sr.title;
-    }
-
 }

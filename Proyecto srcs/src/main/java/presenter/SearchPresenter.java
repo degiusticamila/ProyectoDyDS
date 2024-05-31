@@ -17,7 +17,7 @@ public class SearchPresenter {
     public void onEventClickedGoButtonToSearch() {
         searchModel.addListener(new ModelListener() {
             @Override
-            public void searchFinished() {
+            public void hasFinished() {
                 showSearchResult();
             }
         });

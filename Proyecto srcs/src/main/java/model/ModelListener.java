@@ -1,5 +1,5 @@
 package model;
 
 public interface ModelListener {
-    public void searchFinished();
+    public void hasFinished();
 }

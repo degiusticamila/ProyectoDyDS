@@ -36,8 +36,7 @@ public class SearchModel{
     }
     private void notifySearchFinishedListener(){
         for(ModelListener l :listeners){
-            l.searchFinished();
-            System.out.println("ModelListener "+l);
+            l.hasFinished();
         }
     }
     public void addListener(ModelListener listener) {
