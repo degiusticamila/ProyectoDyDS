@@ -31,7 +31,13 @@ public class StorageView extends JPanel implements View {
 
     }
     public void initListeners(){
-
+        initializeSeriesComboBox();
+    }
+    private void initializeSeriesComboBox(){
+        seriesComboBox.addActionListener(actionEvent ->{
+            System.out.println("se preciona el combo box");
+            storagePresenter.onEventClickedSeriesComboBox();
+        });
     }
     public JPanel getStoragePanel(){
         return storagePanel;
@@ -61,5 +67,17 @@ public class StorageView extends JPanel implements View {
     private void createSavedSeriesScrollPane(){
         savedSeriesScrollPane = new JScrollPane(savedSeriesTextPane);
         storagePanel.add(savedSeriesScrollPane,BorderLayout.CENTER);
+    }
+    public void setWorkingStatus() {
+        for (Component c : storagePanel.getComponents()) {
+            c.setEnabled(false);
+        }
+        savedSeriesTextPane.setEnabled(false);
+        seriesComboBox.setEnabled(false);
+    }
+    public void setWatingStatus () {
+        for (Component c : storagePanel.getComponents()) c.setEnabled(true);
+        savedSeriesTextPane.setEnabled(true);
+        seriesComboBox.setEnabled(true);
     }
 }

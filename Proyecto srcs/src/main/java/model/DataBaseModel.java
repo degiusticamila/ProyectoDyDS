@@ -11,10 +11,13 @@ public class DataBaseModel {
         DataBase.saveInfo(selectedResultTitle.replace("'", "`"), text);  //Dont forget the ' sql problem
         notifySaveLocallyFinished();
     }
-    //No se si esto es muy correcto que digamos
+    //No se si esto es muy correcto que digamos.
+    // tampoco se si deberia agregar un listener para esto y notificar(creo que si).
     public Object[] getSavedSeries(){
         Object[] savedSeriesArray;
         savedSeriesArray = DataBase.getTitles().stream().sorted().toArray();
+        //esto no le gusta :(
+        //notifySaveLocallyFinished();
         return savedSeriesArray;
     }
     public void addListener(ModelListener listener) {

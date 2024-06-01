@@ -44,7 +44,6 @@ public class Window extends JFrame {
         Utilities.setNimbusTheme();
         SwingUtilities.invokeLater(() -> {
             DataBase.loadDatabase();
-            DataBase.saveInfo("test", "sarasa");
 
             SearchView searchView = new SearchView();
             StorageView storageView = new StorageView();

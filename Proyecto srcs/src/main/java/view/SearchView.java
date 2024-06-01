@@ -108,8 +108,6 @@ public class SearchView extends JPanel implements View{
     private void initializeGoSearchButton(){
         goSearchButton.addActionListener(actionEvent ->{
             searchPresenter.onEventClickedGoButtonToSearch();
-
-            //el taskThread deberia declararse aca? pq me falta el action listener del jpopup
         });
     }
     private void initializeSaveLocallyButton(){

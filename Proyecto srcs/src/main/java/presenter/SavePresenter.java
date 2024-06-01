@@ -26,7 +26,9 @@ public class SavePresenter {
                 showTextInStorageView();
             }
         });
+        storageView.setWorkingStatus();
         dataBaseModel.saveLocally(pagePresenter.getLastSelectedResultTitle(), pagePresenter.getLastText());
+        storageView.setWatingStatus();
     }
     private void showTextInStorageView(){
         updateSavedSeriesTextPane();
@@ -44,10 +46,9 @@ public class SavePresenter {
         storageView.getSavedSeriesTextPane().setCaretPosition(0);
     }
     private void updateSeriesComboBox(){
-
+        //mejorar lo de pedir al modelo las series.
         storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(dataBaseModel.getSavedSeries()));
         String title = pagePresenter.getLastSelectedResultTitle();
         storageView.getSeriesComboBox().addItem(title);
-        //seriesComboBox.setModel(new DefaultComboBoxModel(DataBase.getTitles().stream().sorted().toArray()));
     }
 }
