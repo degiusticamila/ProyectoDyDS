@@ -1,9 +1,12 @@
 package presenter;
 
+import model.DataBase;
 import model.DataBaseModel;
 import model.ModelListener;
 import view.SearchView;
 import view.StorageView;
+
+import javax.swing.*;
 
 public class SavePresenter {
     private SearchView searchView;
@@ -20,17 +23,31 @@ public class SavePresenter {
         dataBaseModel.addListener(new ModelListener() {
             @Override
             public void hasFinished() {
-                showText();
+                showTextInStorageView();
             }
         });
         dataBaseModel.saveLocally(pagePresenter.getLastSelectedResultTitle(), pagePresenter.getLastText());
-        System.out.println("guardado :)");
     }
-    private void showText(){
-        //actualiza el desplegable de la storage view.
-        System.out.println("Falta actualizar Storage View, pero funciona!");
+    private void showTextInStorageView(){
+        updateSavedSeriesTextPane();
+        updateSeriesComboBox();
+
     }
     public void setPagePresenter(PagePresenter pagePresenter){
         this.pagePresenter = pagePresenter;
+    }
+    private void updateSavedSeriesTextPane(){
+        storageView.getSavedSeriesTextPane().setContentType("text/html");
+        String text = searchView.getCurrentSearchTextPane().getText();
+
+        storageView.getSavedSeriesTextPane().setText(text);
+        storageView.getSavedSeriesTextPane().setCaretPosition(0);
+    }
+    private void updateSeriesComboBox(){
+
+        storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(dataBaseModel.getSavedSeries()));
+        String title = pagePresenter.getLastSelectedResultTitle();
+        storageView.getSeriesComboBox().addItem(title);
+        //seriesComboBox.setModel(new DefaultComboBoxModel(DataBase.getTitles().stream().sorted().toArray()));
     }
 }

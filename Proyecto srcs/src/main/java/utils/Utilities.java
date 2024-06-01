@@ -7,9 +7,11 @@ import com.google.gson.JsonObject;
 import dyds.tvseriesinfo.fulllogic.SearchResult;
 import retrofit2.Response;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.*;
 
-public class SearchPresenterUtilities {
+public class Utilities {
 
     public static JsonArray calculateJSonObjects(Response<String> lastSearchResponse){
         Gson gson = new Gson();
@@ -72,5 +74,22 @@ public class SearchPresenterUtilities {
             text = textToHtml(text);
         }
         return text;
+    }
+    public static void setNimbusTheme(){
+        try {
+            // Set System L&F
+            UIManager.put("nimbusSelection", new Color(247,248,250));
+            //UIManager.put("nimbusBase", new Color(51,98,140)); //This is redundant!
+
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Something went wrong with UI!");
+        }
     }
 }

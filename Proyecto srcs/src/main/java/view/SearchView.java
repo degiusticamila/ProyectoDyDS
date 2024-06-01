@@ -85,9 +85,6 @@ public class SearchView extends JPanel implements View{
         for (Component c : searchPanel.getComponents()) c.setEnabled(true);
         currentSearchTextPane.setEnabled(true);
     }
-    public void createSaveLocallyButton(){
-        saveLocallyButton = new JButton();
-    }
     public void createSearchResultList(){
         searchResults = new LinkedList<SearchResult>();
     }
@@ -117,7 +114,6 @@ public class SearchView extends JPanel implements View{
     }
     private void initializeSaveLocallyButton(){
         saveLocallyButton.addActionListener(actionEvent ->{
-            System.out.println(savePresenter +" el save presenter no es null");
             savePresenter.onEventSaveLocallyButton();
         });
     }

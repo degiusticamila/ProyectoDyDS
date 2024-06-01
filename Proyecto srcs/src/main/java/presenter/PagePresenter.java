@@ -5,7 +5,7 @@ import model.ModelListener;
 import model.PageModel;
 import view.SearchView;
 import retrofit2.Response;
-import utils.SearchPresenterUtilities;
+import utils.Utilities;
 
 public class PagePresenter {
     private PageModel pageModel;
@@ -32,8 +32,10 @@ public class PagePresenter {
     }
     private void showPageResult(SearchResult searchResult){
         Response<String> lastCallForPageResponse = pageModel.getLastPageResponse();
-        lastText = SearchPresenterUtilities.calculatePageResults(lastCallForPageResponse,searchResult);
+        lastText = Utilities.calculatePageResults(lastCallForPageResponse,searchResult);
         lastSelectedResultTitle = searchResult.title;
+        setLastSelectedResultTitle(lastSelectedResultTitle);
+
         searchView.getCurrentSearchTextPane().setText(lastText);
         searchView.getCurrentSearchTextPane().setCaretPosition(0);
 
@@ -44,5 +46,8 @@ public class PagePresenter {
     }
     public String getLastSelectedResultTitle(){
         return lastSelectedResultTitle;
+    }
+    public void setLastSelectedResultTitle(String lastSelectedResultTitle){
+        this.lastSelectedResultTitle = lastSelectedResultTitle;
     }
 }

@@ -5,7 +5,7 @@ import model.ModelListener;
 import view.SearchView;
 import model.SearchModel;
 import retrofit2.Response;
-import utils.SearchPresenterUtilities;
+import utils.Utilities;
 public class SearchPresenter {
     private SearchView searchView;
     private SearchModel searchModel;
@@ -32,9 +32,9 @@ public class SearchPresenter {
     }
     private void showSearchResult() {
         Response<String> lastSearchResponse = searchModel.getLastSearchResponse();
-        JsonArray jsonResults = SearchPresenterUtilities.calculateJSonObjects(lastSearchResponse);
+        JsonArray jsonResults = Utilities.calculateJSonObjects(lastSearchResponse);
         searchView.createJPopMenu();
-        Iterable<SearchResult> searchResults = SearchPresenterUtilities.calculateSearchResults(jsonResults);
+        Iterable<SearchResult> searchResults = Utilities.calculateSearchResults(jsonResults);
         searchView.createSearchResultList();
         addSearchResults(searchResults);
         searchView.showInfoPopup();

@@ -7,18 +7,19 @@ import model.SearchModel;
 import presenter.PagePresenter;
 import presenter.SavePresenter;
 import presenter.SearchPresenter;
+import utils.Utilities;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GeneralView extends JFrame {
+public class Window extends JFrame {
     public SearchView searchView;
     public StorageView storageView;
     public ScoreView scoreView;
     private JTabbedPane generalTabbedPane;
     //private JPanel generalContentPane;
 
-    public GeneralView(SearchView searchView, StorageView storageView, ScoreView scoreView){
+    public Window(SearchView searchView, StorageView storageView, ScoreView scoreView){
 
         createGeneralTabbedPane();
         generalTabbedPane.add("Search in Wikipedia", searchView.getSearchPanel());
@@ -40,22 +41,7 @@ public class GeneralView extends JFrame {
     }
 
     public static void main(String[] args) {
-        try {
-            // Set System L&F
-            UIManager.put("nimbusSelection", new Color(247,248,250));
-            //UIManager.put("nimbusBase", new Color(51,98,140)); //This is redundant!
-
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        }
-        catch (Exception e) {
-            System.out.println("Something went wrong with UI!");
-        }
-
+        Utilities.setNimbusTheme();
         SwingUtilities.invokeLater(() -> {
             DataBase.loadDatabase();
             DataBase.saveInfo("test", "sarasa");
@@ -63,7 +49,7 @@ public class GeneralView extends JFrame {
             SearchView searchView = new SearchView();
             StorageView storageView = new StorageView();
             ScoreView scoreView = new ScoreView();
-            GeneralView generalView = new GeneralView(searchView,storageView,scoreView);
+            Window generalView = new Window(searchView,storageView,scoreView);
 
             PageModel pageModel = new PageModel();
             SearchModel searchModel = new SearchModel();
