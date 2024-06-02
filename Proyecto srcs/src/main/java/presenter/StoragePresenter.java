@@ -1,6 +1,6 @@
 package presenter;
 
-import model.DataBase;
+import model.DeleteDBModel;
 import model.GetDBModel;
 import model.ModelListener;
 import model.SaveModel;
@@ -12,13 +12,14 @@ public class StoragePresenter {
     private StorageView storageView;
     private SaveModel saveModel;
     private GetDBModel dbModel;
-    private Object[] savedSeries;
+    private DeleteDBModel deleteDBModel;
     private String textSaved;
 
-    public StoragePresenter(StorageView storageView, SaveModel saveModel,GetDBModel dbModel){
+    public StoragePresenter(StorageView storageView, SaveModel saveModel,GetDBModel dbModel,DeleteDBModel deleteDBModel){
         this.storageView = storageView;
         this.saveModel = saveModel;
         this.dbModel = dbModel;
+        this.deleteDBModel = deleteDBModel;
     }
     public void onEventClickedSeriesComboBox(String selectedTitle){
         dbModel.addListener(new ModelListener() {
@@ -37,8 +38,28 @@ public class StoragePresenter {
     }
     private void showInSavedSeriesTextPane(){
         textSaved = dbModel.getLastExtract();
-        System.out.println("text saved: "+textSaved);
         storageView.getSavedSeriesTextPane().setContentType("text/html");
         storageView.getSavedSeriesTextPane().setText(textSaved);
+    }
+    public void onEventClickedDeleteItem(String selectedTitle){
+        deleteDBModel.addListener(new ModelListener() {
+            @Override
+            public void hasFinished() {
+                showSavedSeries();
+                storageView.getSavedSeriesTextPane().setText("");
+            }
+        });
+        storageView.setWorkingStatus();
+        deleteDBModel.deleteItem(selectedTitle);
+        storageView.setWatingStatus();
+    }
+    public void onEventClickedSaveChangesItem(String titleSelect, String textToReplace){
+        saveModel.addListener(new ModelListener() {
+            @Override
+            public void hasFinished() {
+                storageView.getSavedSeriesTextPane().setText(textToReplace);
+            }
+        });
+        saveModel.saveLocally(titleSelect,textToReplace);
     }
 }

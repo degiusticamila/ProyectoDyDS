@@ -7,6 +7,7 @@ public class SaveModel {
     public void saveLocally(String selectedResultTitle,String text){
         System.out.println("titulo "+selectedResultTitle);
         System.out.println("text "+text);
+
         DataBase.saveInfo(selectedResultTitle.replace("'", "`"), text);  //Dont forget the ' sql problem
         notifySaveLocallyFinished();
     }

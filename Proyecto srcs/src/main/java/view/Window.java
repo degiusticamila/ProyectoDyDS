@@ -51,12 +51,13 @@ public class Window extends JFrame {
             SearchModel searchModel = new SearchModel();
             SaveModel dataBaseModel = new SaveModel();
             GetDBModel dbModel = new GetDBModel();
+            DeleteDBModel deleteDBModel = new DeleteDBModel();
 
             SavePresenter savePresenter = new SavePresenter(searchView,storageView,dataBaseModel);
             PagePresenter pagePresenter = new PagePresenter(searchView,pageModel);
             SearchPresenter searchPresenter = new SearchPresenter(searchView,searchModel);
-            StoragePresenter storagePresenter = new StoragePresenter(storageView,dataBaseModel,dbModel);
-            System.out.println("storage presenter: "+storagePresenter);
+            StoragePresenter storagePresenter = new StoragePresenter(storageView,dataBaseModel,dbModel,deleteDBModel);
+
             savePresenter.setPagePresenter(pagePresenter);
 
             storageView.setStoragePresenter(storagePresenter);
@@ -64,7 +65,6 @@ public class Window extends JFrame {
             searchView.setSearchPresenter(searchPresenter);
             searchView.setPagePresenter(pagePresenter);
             searchView.setSavePresenter(savePresenter);
-
 
             generalView.setVisible(true);
         });

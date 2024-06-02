@@ -5,46 +5,79 @@ import presenter.StoragePresenter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class StorageView extends JPanel implements View {
     private StoragePresenter storagePresenter;
     private SaveModel dataBaseModel;
+    private JPopupMenu storedInfoPopup;
     private JTextPane savedSeriesTextPane;
     private JPanel storagePanel;
     private JScrollPane savedSeriesScrollPane;
+    private JMenuItem deleteItem;
     private JComboBox seriesComboBox;
+    private JMenuItem saveChanges;
     public StorageView(){
         initComponents();
-
         initListeners();
         showView();
     }
-
     public void showView() {
         storagePanel.setVisible(true);
     }
     public void initComponents(){
-
         createStoragePanel();
         createSavedSeriesTextPane();
         createSeriesComboBox();
         createSavedSeriesScrollPane();
-
+        createStoredInfoPopup();
+        createDeleteItem();
+        createSaveChangesItem();
     }
     public void initListeners(){
         initializeSeriesComboBox();
+        initializeDeleteItem();
+        initializeSaveChangesItem();
     }
-
-    //Aca hay que actualizar el textPane
     private void initializeSeriesComboBox(){
-        System.out.println(storagePresenter);
-
         seriesComboBox.addActionListener(actionEvent ->{
-            System.out.println("se elige una opcion del combo box, falta agregar dicha funcionalidad");
-            //mostrar la serie elegida en el savedSeriesTextPane :).
             String selectedTitle = (String) seriesComboBox.getSelectedItem();
             storagePresenter.onEventClickedSeriesComboBox(selectedTitle);
         });
+    }
+    private void initializeDeleteItem(){
+        deleteItem.addActionListener(actionEvent ->{
+            String titleSelectToDelete = (String) seriesComboBox.getSelectedItem();
+            System.out.println("titulo seleccionado para borrar: "+titleSelectToDelete);
+            if(seriesComboBox.getSelectedIndex()  > -1){
+                storagePresenter.onEventClickedDeleteItem(titleSelectToDelete);
+            }
+        });
+    }
+    private void initializeSaveChangesItem(){
+        saveChanges.addActionListener(actionEvent ->{
+            String titleSelect = (String) seriesComboBox.getSelectedItem();
+            String textToReplace = savedSeriesTextPane.getText();
+            storagePresenter.onEventClickedSaveChangesItem(titleSelect,textToReplace);
+            // DataBase.saveInfo(seriesComboBox.getSelectedItem().toString().replace("'", "`"), savedSeriesTextPane.getText());
+        });
+    }
+    private void initializePopupMenu(){
+        savedSeriesTextPane.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                showPopup(e);
+            }
+            public void mouseReleased(MouseEvent e) {
+                showPopup(e);
+            }
+        });
+    }
+    private void showPopup(MouseEvent e){
+        if (e.isPopupTrigger() && storedInfoPopup != null) {
+            storedInfoPopup.show(e.getComponent(), e.getX(), e.getY());
+        }
     }
     public JPanel getStoragePanel(){
         return storagePanel;
@@ -61,8 +94,9 @@ public class StorageView extends JPanel implements View {
     }
     private void createSavedSeriesTextPane(){
         savedSeriesTextPane = new JTextPane();
-        savedSeriesTextPane.setPreferredSize(new Dimension(500, 300));
-        savedSeriesTextPane.setMinimumSize(new Dimension(500, 300));
+        savedSeriesTextPane.setPreferredSize(new Dimension(500, 500));
+        //savedSeriesTextPane.setMinimumSize(new Dimension(500, 500));
+        initializePopupMenu();
         storagePanel.add(savedSeriesTextPane);
     }
     private void createSeriesComboBox(){
@@ -90,11 +124,20 @@ public class StorageView extends JPanel implements View {
     public void setStoragePresenter(StoragePresenter storagePresenter){
         this.storagePresenter = storagePresenter;
         updateStorageComboBox();
-
     }
-    //no se si respeta demasiado mvp :(
+    private void createStoredInfoPopup(){
+        storedInfoPopup = new JPopupMenu();
+        storagePanel.setComponentPopupMenu(storedInfoPopup);
+    }
+    private void createDeleteItem(){
+        deleteItem = new JMenuItem("Delete!");
+        storedInfoPopup.add(deleteItem);
+    }
+    private void createSaveChangesItem(){
+        saveChanges = new JMenuItem("Save changes!");
+        storedInfoPopup.add(saveChanges);
+    }
     private void updateStorageComboBox(){
         storagePresenter.showSavedSeries();
     }
-
 }
