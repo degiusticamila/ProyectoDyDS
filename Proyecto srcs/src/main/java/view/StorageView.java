@@ -1,16 +1,14 @@
 package view;
 
-import model.DataBaseModel;
+import model.SaveModel;
 import presenter.StoragePresenter;
 
 import javax.swing.*;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 import java.awt.*;
 
 public class StorageView extends JPanel implements View {
     private StoragePresenter storagePresenter;
-    private DataBaseModel dataBaseModel;
+    private SaveModel dataBaseModel;
     private JTextPane savedSeriesTextPane;
     private JPanel storagePanel;
     private JScrollPane savedSeriesScrollPane;

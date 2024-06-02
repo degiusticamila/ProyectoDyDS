@@ -1,32 +1,43 @@
 package presenter;
 
 import model.DataBase;
-import model.DataBaseModel;
+import model.GetDBModel;
+import model.ModelListener;
+import model.SaveModel;
 import view.StorageView;
 
 import javax.swing.*;
 
 public class StoragePresenter {
     private StorageView storageView;
-    private DataBaseModel dataBaseModel;
+    private SaveModel saveModel;
+    private GetDBModel dbModel;
     private Object[] savedSeries;
     private String textSaved;
 
-    public StoragePresenter(StorageView storageView, DataBaseModel dataBaseModel){
+    public StoragePresenter(StorageView storageView, SaveModel saveModel,GetDBModel dbModel){
         this.storageView = storageView;
-        this.dataBaseModel = dataBaseModel;
+        this.saveModel = saveModel;
+        this.dbModel = dbModel;
     }
     public void onEventClickedSeriesComboBox(String selectedTitle){
+        dbModel.addListener(new ModelListener() {
+            @Override
+            public void hasFinished() {
+                showInSavedSeriesTextPane();
+            }
+        });
         storageView.setWorkingStatus();
-        textSaved = DataBase.getExtract(selectedTitle);
-        //savedSeries = dataBaseModel.getSavedSeries();
+        dbModel.getExtractText(selectedTitle);
         storageView.setWatingStatus();
-        showInSavedSeriesTextPane(textSaved);
+
     }
     public void showSavedSeries(){
-        storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(dataBaseModel.getSavedSeries()));
+        storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(saveModel.getSavedSeries()));
     }
-    private void showInSavedSeriesTextPane(String textSaved){
+    private void showInSavedSeriesTextPane(){
+        textSaved = dbModel.getLastExtract();
+        System.out.println("text saved: "+textSaved);
         storageView.getSavedSeriesTextPane().setContentType("text/html");
         storageView.getSavedSeriesTextPane().setText(textSaved);
     }

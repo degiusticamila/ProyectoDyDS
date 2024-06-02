@@ -1,9 +1,8 @@
 package model;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
-public class DataBaseModel {
+public class SaveModel {
     private ArrayList<ModelListener> dataBaseListeners = new ArrayList<>();
     public void saveLocally(String selectedResultTitle,String text){
         System.out.println("titulo "+selectedResultTitle);

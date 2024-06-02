@@ -1,7 +1,6 @@
 package presenter;
 
-import model.DataBase;
-import model.DataBaseModel;
+import model.SaveModel;
 import model.ModelListener;
 import view.SearchView;
 import view.StorageView;
@@ -11,10 +10,10 @@ import javax.swing.*;
 public class SavePresenter {
     private SearchView searchView;
     private StorageView storageView;
-    private DataBaseModel dataBaseModel;
+    private SaveModel dataBaseModel;
     private PagePresenter pagePresenter;
 
-    public SavePresenter(SearchView searchView,StorageView storageView,DataBaseModel dataBaseModel){
+    public SavePresenter(SearchView searchView, StorageView storageView, SaveModel dataBaseModel){
         this.searchView = searchView;
         this.storageView = storageView;
         this.dataBaseModel = dataBaseModel;
