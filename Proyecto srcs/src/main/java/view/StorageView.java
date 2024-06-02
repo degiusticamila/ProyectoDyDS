@@ -43,30 +43,10 @@ public class StorageView extends JPanel implements View {
 
         seriesComboBox.addActionListener(actionEvent ->{
             System.out.println("se elige una opcion del combo box, falta agregar dicha funcionalidad");
-
+            //mostrar la serie elegida en el savedSeriesTextPane :).
+            String selectedTitle = (String) seriesComboBox.getSelectedItem();
+            storagePresenter.onEventClickedSeriesComboBox(selectedTitle);
         });
-
-        /**
-
-        seriesComboBox.addPopupMenuListener(new PopupMenuListener() {
-            @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-                System.out.println(storagePresenter);
-                storagePresenter.onEventClickedSeriesComboBox();
-                System.out.println("se desplega el Combo Box de series guardadas :)");
-            }
-
-            @Override
-            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-
-            }
-
-            @Override
-            public void popupMenuCanceled(PopupMenuEvent e) {
-
-            }
-        });
-        **/
     }
     public JPanel getStoragePanel(){
         return storagePanel;
@@ -118,4 +98,5 @@ public class StorageView extends JPanel implements View {
     private void updateStorageComboBox(){
         storagePresenter.showSavedSeries();
     }
+
 }

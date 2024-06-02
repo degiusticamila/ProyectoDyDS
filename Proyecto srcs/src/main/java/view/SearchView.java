@@ -20,6 +20,7 @@ public class SearchView extends JPanel implements View{
     private PagePresenter pagePresenter;
     private SavePresenter savePresenter;
     private JButton saveLocallyButton;
+    private JScrollPane scrollPaneCurrentSearch;
     private LinkedList<SearchResult> searchResults;
     public SearchView(){
 
@@ -33,11 +34,15 @@ public class SearchView extends JPanel implements View{
     public void initComponents(){
         searchPanel = new JPanel();
         //createSaveLocallyButton();
-        currentSearchTextPane.setPreferredSize(new Dimension(500, 500));
+        //currentSearchTextPane.setPreferredSize(new Dimension(500, 500));
         searchPanel.add(seriesToSearchTextField);
         searchPanel.add(goSearchButton);
-        searchPanel.add(currentSearchTextPane);
+        //searchPanel.add(currentSearchTextPane);
         searchPanel.add(saveLocallyButton);
+        createCurrentSearchPane();
+        createScrollPane();
+        searchPanel.add(currentSearchTextPane);
+
     }
     public JTextField getSeriesToSearchTextField(){
         return seriesToSearchTextField;
@@ -66,6 +71,7 @@ public class SearchView extends JPanel implements View{
         initializeSeriesToSearchTextField();
         initializeGoSearchButton();
         initializeSaveLocallyButton();
+
     }
     public void setSearchPresenter(SearchPresenter searchPresenter){
         this.searchPresenter = searchPresenter;
@@ -115,6 +121,14 @@ public class SearchView extends JPanel implements View{
         saveLocallyButton.addActionListener(actionEvent ->{
             savePresenter.onEventSaveLocallyButton();
         });
+    }
+    private void createCurrentSearchPane(){
+        currentSearchTextPane = new JTextPane();
+        currentSearchTextPane.setPreferredSize(new Dimension(500, 500));
+    }
+    private void createScrollPane(){
+        scrollPaneCurrentSearch = new JScrollPane(currentSearchTextPane);
+        searchPanel.add(scrollPaneCurrentSearch,BorderLayout.CENTER);
     }
     //No se como cambiarlo para que sea clean.
     public SearchResult getSearchResultActual(){
