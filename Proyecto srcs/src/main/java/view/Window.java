@@ -7,6 +7,7 @@ import model.SearchModel;
 import presenter.PagePresenter;
 import presenter.SavePresenter;
 import presenter.SearchPresenter;
+import presenter.StoragePresenter;
 import utils.Utilities;
 
 import javax.swing.*;
@@ -57,12 +58,16 @@ public class Window extends JFrame {
             SavePresenter savePresenter = new SavePresenter(searchView,storageView,dataBaseModel);
             PagePresenter pagePresenter = new PagePresenter(searchView,pageModel);
             SearchPresenter searchPresenter = new SearchPresenter(searchView,searchModel);
-
+            StoragePresenter storagePresenter = new StoragePresenter(storageView,dataBaseModel);
+            System.out.println("storage presenter: "+storagePresenter);
             savePresenter.setPagePresenter(pagePresenter);
+
+            storageView.setStoragePresenter(storagePresenter);
 
             searchView.setSearchPresenter(searchPresenter);
             searchView.setPagePresenter(pagePresenter);
             searchView.setSavePresenter(savePresenter);
+
 
             generalView.setVisible(true);
         });

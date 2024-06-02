@@ -26,7 +26,10 @@ public class StoragePresenter {
         savedSeries = dataBaseModel.getSavedSeries();
         storageView.setWatingStatus();
     }
-    private void showSavedSeries(){
-        storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(savedSeries));
+    public void showSavedSeries(){
+        storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(dataBaseModel.getSavedSeries()));
     }
+
+
+
 }

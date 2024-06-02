@@ -22,9 +22,10 @@ public class SearchView extends JPanel implements View{
     private JButton saveLocallyButton;
     private LinkedList<SearchResult> searchResults;
     public SearchView(){
-        initListeners();
+
         initComponents();
         showView();
+        initListeners();
     }
     public void showView(){
         searchPanel.setVisible(true);
