@@ -1,10 +1,7 @@
 package view;
 
 import model.*;
-import presenter.PagePresenter;
-import presenter.SavePresenter;
-import presenter.SearchPresenter;
-import presenter.StoragePresenter;
+import presenter.*;
 import utils.Utilities;
 
 import javax.swing.*;
@@ -54,19 +51,23 @@ public class Window extends JFrame {
             SaveModel dataBaseModel = new SaveModel();
             GetDBModel dbModel = new GetDBModel();
             DeleteDBModel deleteDBModel = new DeleteDBModel();
+            ScoreModel scoreModel = new ScoreModel();
 
             SavePresenter savePresenter = new SavePresenter(searchView,storageView,dataBaseModel);
             PagePresenter pagePresenter = new PagePresenter(searchView,pageModel);
             SearchPresenter searchPresenter = new SearchPresenter(searchView,searchModel);
             StoragePresenter storagePresenter = new StoragePresenter(storageView,dataBaseModel,dbModel,deleteDBModel);
+            ScorePresenter scorePresenter = new ScorePresenter(searchView,scoreView,scoreModel);
 
             savePresenter.setPagePresenter(pagePresenter);
 
             storageView.setStoragePresenter(storagePresenter);
+            scorePresenter.setPagePresenter(pagePresenter);
 
             searchView.setSearchPresenter(searchPresenter);
             searchView.setPagePresenter(pagePresenter);
             searchView.setSavePresenter(savePresenter);
+            searchView.setScorePresenter(scorePresenter);
 
 
 

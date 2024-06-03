@@ -36,17 +36,13 @@ public class SearchView extends JPanel implements View{
     }
     public void initComponents(){
         searchPanel = new JPanel();
-        //createSaveLocallyButton();
-        //currentSearchTextPane.setPreferredSize(new Dimension(500, 500));
         searchPanel.add(seriesToSearchTextField);
         searchPanel.add(goSearchButton);
-        //searchPanel.add(currentSearchTextPane);
         searchPanel.add(saveLocallyButton);
         createCurrentSearchPane();
         createScrollPane();
         searchPanel.add(currentSearchTextPane);
         createGiveScoreButton();
-
     }
     public JTextField getSeriesToSearchTextField(){
         return seriesToSearchTextField;
@@ -75,6 +71,7 @@ public class SearchView extends JPanel implements View{
         initializeSeriesToSearchTextField();
         initializeGoSearchButton();
         initializeSaveLocallyButton();
+        initializeScoreButton();
 
     }
     public void setSearchPresenter(SearchPresenter searchPresenter){
@@ -132,7 +129,10 @@ public class SearchView extends JPanel implements View{
     //no está terminado.
     private void initializeScoreButton(){
         scoreButton.addActionListener(actionEvent ->{
-            scorePresenter.onEventClickedScoreButton();
+            String input = JOptionPane.showInputDialog(searchPanel, "Ingrese un número:");
+            Integer score = Integer.parseInt(input);
+
+            scorePresenter.onEventClickedScoreButton(score);
         });
     }
     private void createCurrentSearchPane(){

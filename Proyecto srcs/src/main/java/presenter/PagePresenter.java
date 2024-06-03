@@ -38,8 +38,6 @@ public class PagePresenter {
 
         searchView.getCurrentSearchTextPane().setText(lastText);
         searchView.getCurrentSearchTextPane().setCaretPosition(0);
-
-
     }
     public String getLastText(){
         return lastText;

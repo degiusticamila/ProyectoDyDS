@@ -5,6 +5,7 @@ import javax.swing.*;
 public class ScoreView extends JPanel implements View{
 
     private JPanel scorePanel;
+    private JComboBox ratedSeriesComboBox;
 
     public ScoreView(){
         initComponents();
@@ -23,6 +24,10 @@ public class ScoreView extends JPanel implements View{
     }
     public void createScorePanel(){
         scorePanel = new JPanel();
+    }
+    public void createRatedSeriesComboBox(){
+        ratedSeriesComboBox = new JComboBox();
+        scorePanel.add(ratedSeriesComboBox);
     }
     public JPanel getScorePanel(){
         return scorePanel;
