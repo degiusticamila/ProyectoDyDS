@@ -75,6 +75,12 @@ public class Window extends JFrame {
             int testScore = 95;
 
 
+            // Guardamos el puntaje
+            DataBase.saveScore(testTitle, testScore);
+            System.out.println("pasó save score");
+            // Verificamos que el puntaje se haya guardado correctamente
+            System.out.println("Puntajes para '" + testTitle + "': " + DataBase.getScores(testTitle));
+
             generalView.setVisible(true);
         });
     }

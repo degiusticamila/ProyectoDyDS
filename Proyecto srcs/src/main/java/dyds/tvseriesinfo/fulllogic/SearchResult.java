@@ -6,7 +6,6 @@ public class SearchResult extends JMenuItem {
     public String title;
     public String pageID;
     public String snippet;
-    public ImageIcon scoreIcon;
 
     public SearchResult(String title, String pageID, String snippet) {
         String itemText = "<html><font face=\"arial\">" + title + ": " + snippet;
@@ -17,11 +16,6 @@ public class SearchResult extends JMenuItem {
         this.pageID = pageID;
         this.snippet = snippet;
     }
-    public void createScoreIcon(ImageIcon imageIcon){
-        this.scoreIcon = imageIcon;
-    }
-    public ImageIcon getScoreIcon(){
-        return scoreIcon;
-    }
+
 
 }

@@ -132,7 +132,7 @@ public class SearchView extends JPanel implements View{
             String input = JOptionPane.showInputDialog(searchPanel, "Ingrese un número:");
             Integer score = Integer.parseInt(input);
 
-            scorePresenter.onEventClickedScoreButton(score,searchResultActual);
+            scorePresenter.onEventClickedScoreButton(score);
         });
     }
     private void createCurrentSearchPane(){

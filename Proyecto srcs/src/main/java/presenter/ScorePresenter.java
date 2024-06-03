@@ -1,66 +1,40 @@
 package presenter;
 
-import dyds.tvseriesinfo.fulllogic.SearchResult;
 import model.ModelListener;
-import model.RankedSeries;
+import utils.ScoreItem;
 import view.ScoreView;
 import view.SearchView;
 import model.ScoreModel;
-
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class ScorePresenter {
     private SearchView searchView;
     private ScoreView scoreView;
     private ScoreModel scoreModel;
     private String actualTitle;
-    private ArrayList<RankedSeries> ratedSeries;
     private PagePresenter pagePresenter;
-    private RankedSeries actualRankedSeries;
     public ScorePresenter(SearchView searchView, ScoreView scoreView, ScoreModel scoreModel){
         this.searchView = searchView;
         this.scoreView = scoreView;
         this.scoreModel = scoreModel;
+
     }
-    public void onEventClickedScoreButton(Integer score, SearchResult selectedSeries){
+    public void onEventClickedScoreButton(Integer score){
         System.out.println("score model: "+scoreModel);
         scoreModel.addListener(new ModelListener() {
             @Override
             public void hasFinished() {
-                showNewScore(selectedSeries);
+                showNewScore(actualTitle);
             }
         });
-       // if(ratedSeries == null){
-         //   createRatedSeriesList();
-        //}
-        //ratedSeries = getRatedSeries();
-        ratedSeries = scoreModel.getRatedSeries();
         actualTitle = pagePresenter.getLastSelectedResultTitle();
-        actualRankedSeries = new RankedSeries(actualTitle,score);
+        System.out.println("titulo a puntuar: "+actualTitle);
         scoreModel.updateScore(actualTitle,score);
     }
-    private void showNewScore(SearchResult selectedSeries){
-       scoreView.getRatedSeriesComboBox().setModel(new DefaultComboBoxModel());
-        for(RankedSeries rankedSeries : ratedSeries){
-            scoreView.getRatedSeriesComboBox().addItem(rankedSeries.getSeriesTitle()+" "+rankedSeries.getScore()+" "+rankedSeries.getLastModificationDateFormatted());
-        }
-        addRatedSeries(actualRankedSeries);
-        String date = actualRankedSeries.getLastModificationDateFormatted();
-        String title = actualRankedSeries.getSeriesTitle();
-        Integer score = actualRankedSeries.getScore();
+    private void showNewScore(String actualTitle){
+        ScoreItem scoreItem = new ScoreItem(actualTitle,"/utils/image-icon.png");
+        scoreView.getRatedSeriesComboBox().addItem(scoreItem);
 
-        scoreView.getRatedSeriesComboBox().addItem(title+" "+ score +" "+ date);
-    }
-    private void createRatedSeriesList(){
-        ratedSeries = new ArrayList<>();
-    }
-    private RankedSeries addRatedSeries(RankedSeries rankedSeries){
-        ratedSeries.add(rankedSeries);
-        return rankedSeries;
-    }
-    private ArrayList<RankedSeries> getRatedSeries(){
-        return ratedSeries;
     }
     public void setPagePresenter(PagePresenter pagePresenter){
         this.pagePresenter = pagePresenter;

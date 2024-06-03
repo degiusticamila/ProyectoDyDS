@@ -1,5 +1,7 @@
 package view;
 
+import utils.ScoreItem;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,7 +10,7 @@ public class ScoreView extends JPanel implements View{
     private JPanel scorePanel;
     //private ScoreItem scoreItem;
     private JButton modifyScore;
-    private JComboBox ratedSeriesComboBox;
+    private JComboBox<ScoreItem> ratedSeriesComboBox;
 
     public ScoreView(){
         initComponents();
@@ -42,7 +44,7 @@ public class ScoreView extends JPanel implements View{
     public JPanel getScorePanel(){
         return scorePanel;
     }
-    public JComboBox getRatedSeriesComboBox(){
+    public JComboBox<ScoreItem> getRatedSeriesComboBox(){
         return ratedSeriesComboBox;
     }
 }
