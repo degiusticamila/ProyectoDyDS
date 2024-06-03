@@ -1,15 +1,17 @@
 package presenter;
 
 import model.ModelListener;
+import utils.ScoreItem;
 import view.ScoreView;
 import view.SearchView;
 import model.ScoreModel;
+import javax.swing.*;
 
 public class ScorePresenter {
     private SearchView searchView;
     private ScoreView scoreView;
     private ScoreModel scoreModel;
-
+    private String actualTitle;
     private PagePresenter pagePresenter;
     public ScorePresenter(SearchView searchView, ScoreView scoreView, ScoreModel scoreModel){
         this.searchView = searchView;
@@ -22,17 +24,17 @@ public class ScorePresenter {
         scoreModel.addListener(new ModelListener() {
             @Override
             public void hasFinished() {
-                showNewScore();
+                showNewScore(actualTitle);
             }
         });
-        String actualTitle = pagePresenter.getLastSelectedResultTitle();
+        actualTitle = pagePresenter.getLastSelectedResultTitle();
         System.out.println("titulo a puntuar: "+actualTitle);
         scoreModel.updateScore(actualTitle,score);
     }
-    private void showNewScore(){
-        //agregar una insignia de que la serie fue calificada.
-        //agregar la serie calificada al desplegable de la score view.
-        // no se que mas :P ya basta Gotti
+    private void showNewScore(String actualTitle){
+        ScoreItem scoreItem = new ScoreItem(actualTitle,"/utils/image-icon.png");
+        scoreView.getRatedSeriesComboBox().addItem(scoreItem);
+
     }
     public void setPagePresenter(PagePresenter pagePresenter){
         this.pagePresenter = pagePresenter;

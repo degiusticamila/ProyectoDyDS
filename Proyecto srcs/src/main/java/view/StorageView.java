@@ -60,7 +60,6 @@ public class StorageView extends JPanel implements View {
             String titleSelect = (String) seriesComboBox.getSelectedItem();
             String textToReplace = savedSeriesTextPane.getText();
             storagePresenter.onEventClickedSaveChangesItem(titleSelect,textToReplace);
-            // DataBase.saveInfo(seriesComboBox.getSelectedItem().toString().replace("'", "`"), savedSeriesTextPane.getText());
         });
     }
     private void initializePopupMenu(){
