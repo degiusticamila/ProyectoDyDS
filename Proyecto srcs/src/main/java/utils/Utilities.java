@@ -23,6 +23,7 @@ public class Utilities {
     }
     public static Iterable<SearchResult> calculateSearchResults(JsonArray jsonResults){
         LinkedList<SearchResult> searchResultsList = new LinkedList<SearchResult>();
+        //ImageIcon estrellita = new ImageIcon("image-icon-png");
         for (JsonElement je : jsonResults) {
             JsonObject searchResult = je.getAsJsonObject();
             String searchResultTitle = searchResult.get("title").getAsString();
@@ -30,6 +31,7 @@ public class Utilities {
             String searchResultSnippet = searchResult.get("snippet").getAsString();
 
             SearchResult sr = new SearchResult(searchResultTitle, searchResultPageId, searchResultSnippet);
+            //sr.createScoreIcon(estrellita);
             searchResultsList.add(sr);
         }
         return searchResultsList;

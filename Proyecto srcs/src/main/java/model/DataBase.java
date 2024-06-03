@@ -272,4 +272,69 @@ public class DataBase {
     }
     return score;
   }
+  public static Date getDates(String title) {
+    Connection connection = null;
+    Date date = null;
+
+    try {
+      connection = DriverManager.getConnection("jdbc:sqlite:./dictionary.db");
+      Statement statement = connection.createStatement();
+
+      statement.setQueryTimeout(30);  // set timeout to 30 sec.
+
+      // Execute the query to get the score for the given title
+      ResultSet rs = statement.executeQuery("SELECT lastModificationDate FROM scores WHERE title = '" + title + "'");
+
+      // Process the result set
+      if (rs.next()) {
+        date = rs.getDate("lastModificationDate");
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    } finally {
+      try {
+        if (connection != null) {
+          connection.close();
+        }
+      } catch (SQLException e) {
+        System.err.println(e);
+      }
+    }
+    return date;
+  }
+  public static ArrayList<String> getTitlesScores()
+  {
+    ArrayList<String> scoreTitles = new ArrayList<>();
+    Connection connection = null;
+    try
+    {
+      // create a database connection
+      connection = DriverManager.getConnection("jdbc:sqlite:./dictionary.db");
+      Statement statement = connection.createStatement();
+      statement.setQueryTimeout(30);  // set timeout to 30 sec.
+
+      ResultSet rs = statement.executeQuery("select * from scores");
+      while(rs.next()) scoreTitles.add(rs.getString("title"));
+    }
+    catch(SQLException e)
+    {
+      // if the error message is "out of memory",
+      // it probably means no database file is found
+      System.err.println(e.getMessage());
+    }
+    finally
+    {
+      try
+      {
+        if(connection != null)
+          connection.close();
+      }
+      catch(SQLException e)
+      {
+        // connection close failed.
+        System.err.println(e);
+      }
+      return scoreTitles;
+    }
+  }
 }
