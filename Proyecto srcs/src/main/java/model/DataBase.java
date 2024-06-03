@@ -20,8 +20,13 @@ public class DataBase {
         statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
         //statement.executeUpdate("create table catalog (id INTEGER PRIMARY KEY AUTOINCREMENT, title string, extract string, source integer)");
-        statement.executeUpdate("create table catalog (id INTEGER, title string PRIMARY KEY, extract string, source integer)");
+        statement.executeUpdate("create table IF NOT EXISTS catalog (id INTEGER, title string PRIMARY KEY, extract string, source integer)");
         //If the DB was created before, a SQL error is reported but it is not harmfull...
+
+        //Creo la tabla
+       // statement.executeUpdate("CREATE TABLE IF NOT EXISTS scores (title TEXT PRIMARY KEY, score INTEGER, lastModificationDate DATE)");
+        statement.executeUpdate("CREATE TABLE IF NOT EXISTS scores(title string PRIMARY KEY, score INTEGER, lastModificationDate date)");
+        System.out.println("entra a ejecutarse scores");
       }
 
     } catch (SQLException e) {
@@ -31,7 +36,6 @@ public class DataBase {
 
   public static void testDB()
   {
-
     Connection connection = null;
     try
     {
@@ -148,7 +152,6 @@ public class DataBase {
 
   public static String getExtract(String title)
   {
-
     Connection connection = null;
     try
     {
@@ -216,5 +219,57 @@ public class DataBase {
         System.err.println(e);
       }
     }
+  }
+  public static void saveScore(String title, Integer score){
+    Connection connection = null;
+
+    try {
+      connection = DriverManager.getConnection("jdbc:sqlite:./dictionary.db");
+      Statement statement = connection.createStatement();
+
+      statement.setQueryTimeout(30);  // set timeout to 30 sec.
+      statement.executeUpdate("replace into scores values('"+ title + "', "+ score + ", datetime('now'))");
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    finally {
+      try {
+        if (connection != null)
+          connection.close();
+      } catch (SQLException e) {
+        System.err.println(e);
+      }
+    }
+  }
+  public static Integer getScores(String title) {
+    Connection connection = null;
+    Integer score = null;
+
+    try {
+      connection = DriverManager.getConnection("jdbc:sqlite:./dictionary.db");
+      Statement statement = connection.createStatement();
+
+      statement.setQueryTimeout(30);  // set timeout to 30 sec.
+
+      // Execute the query to get the score for the given title
+      ResultSet rs = statement.executeQuery("SELECT score FROM scores WHERE title = '" + title + "'");
+
+      // Process the result set
+      if (rs.next()) {
+        score = rs.getInt("score");
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    } finally {
+      try {
+        if (connection != null) {
+          connection.close();
+        }
+      } catch (SQLException e) {
+        System.err.println(e);
+      }
+    }
+    return score;
   }
 }

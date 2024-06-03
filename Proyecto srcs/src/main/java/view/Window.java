@@ -8,6 +8,8 @@ import presenter.StoragePresenter;
 import utils.Utilities;
 
 import javax.swing.*;
+import java.util.Date;
+
 
 public class Window extends JFrame {
     public SearchView searchView;
@@ -65,6 +67,18 @@ public class Window extends JFrame {
             searchView.setSearchPresenter(searchPresenter);
             searchView.setPagePresenter(pagePresenter);
             searchView.setSavePresenter(savePresenter);
+
+
+
+            String testTitle = "TestTitle";
+            int testScore = 95;
+
+
+            // Guardamos el puntaje
+            DataBase.saveScore(testTitle, testScore);
+            System.out.println("pasó save score");
+            // Verificamos que el puntaje se haya guardado correctamente
+            System.out.println("Puntajes para '" + testTitle + "': " + DataBase.getScores(testTitle));
 
             generalView.setVisible(true);
         });

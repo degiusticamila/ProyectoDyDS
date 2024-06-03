@@ -3,6 +3,7 @@ package view;
 import dyds.tvseriesinfo.fulllogic.SearchResult;
 import presenter.PagePresenter;
 import presenter.SavePresenter;
+import presenter.ScorePresenter;
 import presenter.SearchPresenter;
 
 import javax.swing.*;
@@ -19,9 +20,11 @@ public class SearchView extends JPanel implements View{
     private SearchPresenter searchPresenter;
     private PagePresenter pagePresenter;
     private SavePresenter savePresenter;
+    private ScorePresenter scorePresenter;
     private JButton saveLocallyButton;
     private JScrollPane scrollPaneCurrentSearch;
     private LinkedList<SearchResult> searchResults;
+    private JButton scoreButton;
     public SearchView(){
 
         initComponents();
@@ -42,6 +45,7 @@ public class SearchView extends JPanel implements View{
         createCurrentSearchPane();
         createScrollPane();
         searchPanel.add(currentSearchTextPane);
+        createGiveScoreButton();
 
     }
     public JTextField getSeriesToSearchTextField(){
@@ -81,6 +85,9 @@ public class SearchView extends JPanel implements View{
     }
     public void setSavePresenter(SavePresenter savePresenter){
         this.savePresenter = savePresenter;
+    }
+    public void setScorePresenter(ScorePresenter scorePresenter){
+        this.scorePresenter = scorePresenter;
     }
     public void setWorkingStatus() {
         for (Component c : searchPanel.getComponents()) {
@@ -122,6 +129,12 @@ public class SearchView extends JPanel implements View{
             savePresenter.onEventSaveLocallyButton();
         });
     }
+    //no está terminado.
+    private void initializeScoreButton(){
+        scoreButton.addActionListener(actionEvent ->{
+            scorePresenter.onEventClickedScoreButton();
+        });
+    }
     private void createCurrentSearchPane(){
         currentSearchTextPane = new JTextPane();
         currentSearchTextPane.setPreferredSize(new Dimension(500, 500));
@@ -129,6 +142,10 @@ public class SearchView extends JPanel implements View{
     private void createScrollPane(){
         scrollPaneCurrentSearch = new JScrollPane(currentSearchTextPane);
         searchPanel.add(scrollPaneCurrentSearch,BorderLayout.CENTER);
+    }
+    private void createGiveScoreButton(){
+        scoreButton = new JButton("Define score");
+        searchPanel.add(scoreButton);
     }
     //No se como cambiarlo para que sea clean.
     public SearchResult getSearchResultActual(){
