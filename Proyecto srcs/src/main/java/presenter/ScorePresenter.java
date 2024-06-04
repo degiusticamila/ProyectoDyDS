@@ -31,10 +31,6 @@ public class ScorePresenter {
                 showNewScore(selectedSeries);
             }
         });
-       // if(ratedSeries == null){
-         //   createRatedSeriesList();
-        //}
-        //ratedSeries = getRatedSeries();
         ratedSeries = scoreModel.getRatedSeries();
         actualTitle = pagePresenter.getLastSelectedResultTitle();
         actualRankedSeries = new RankedSeries(actualTitle,score);
@@ -48,14 +44,20 @@ public class ScorePresenter {
         Integer score = actualRankedSeries.getScore();
 
         scoreView.getRatedSeriesComboBox().addItem(title+" "+ score +" "+ date);
+
     }
     public void updateScoreComboBox(){
         scoreView.getRatedSeriesComboBox().setModel(new DefaultComboBoxModel());
         ratedSeries = scoreModel.getRatedSeries();
+        sortRatedSeries(ratedSeries);
         System.out.println("rated series: "+ratedSeries);
         for(RankedSeries rankedSeries : ratedSeries){
             scoreView.getRatedSeriesComboBox().addItem(rankedSeries.getSeriesTitle()+" "+rankedSeries.getScore()+" "+rankedSeries.getLastModificationDateFormatted());
         }
+
+    }
+    private void sortRatedSeries(ArrayList<RankedSeries> ratedSeries){
+        //ordenar de menor a mayor puntaje.
     }
     private void createRatedSeriesList(){
         ratedSeries = new ArrayList<>();
