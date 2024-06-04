@@ -63,6 +63,7 @@ public class Window extends JFrame {
 
             storageView.setStoragePresenter(storagePresenter);
             scorePresenter.setPagePresenter(pagePresenter);
+            searchPresenter.setScorePresenter(scorePresenter);
 
             searchView.setSearchPresenter(searchPresenter);
             searchView.setPagePresenter(pagePresenter);
@@ -70,9 +71,6 @@ public class Window extends JFrame {
             searchView.setScorePresenter(scorePresenter);
             scoreView.setScorePresenter(scorePresenter);
 
-
-            String testTitle = "TestTitle";
-            int testScore = 95;
 
 
             generalView.setVisible(true);

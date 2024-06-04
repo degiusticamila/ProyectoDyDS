@@ -5,8 +5,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dyds.tvseriesinfo.fulllogic.SearchResult;
+import model.DataBase;
+import model.RankedSeries;
 import retrofit2.Response;
 
+import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
@@ -30,8 +33,12 @@ public class Utilities {
             String searchResultPageId = searchResult.get("pageid").getAsString();
             String searchResultSnippet = searchResult.get("snippet").getAsString();
 
+
             SearchResult sr = new SearchResult(searchResultTitle, searchResultPageId, searchResultSnippet);
-            //sr.createScoreIcon(estrellita);
+            int scoreValue = DataBase.getScores(searchResultTitle);
+            sr.setScoreValue(scoreValue);
+
+
             searchResultsList.add(sr);
         }
         return searchResultsList;

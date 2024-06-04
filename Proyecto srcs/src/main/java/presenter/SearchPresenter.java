@@ -2,13 +2,19 @@ package presenter;
 import com.google.gson.JsonArray;
 import dyds.tvseriesinfo.fulllogic.SearchResult;
 import model.ModelListener;
+import model.RankedSeries;
 import view.SearchView;
 import model.SearchModel;
 import retrofit2.Response;
 import utils.Utilities;
+
+import javax.swing.*;
+import java.util.ArrayList;
+
 public class SearchPresenter {
     private SearchView searchView;
     private SearchModel searchModel;
+    private ScorePresenter scorePresenter;
 
     public SearchPresenter(SearchView searchView, SearchModel searchModel) {
         this.searchView = searchView;
@@ -41,8 +47,16 @@ public class SearchPresenter {
     }
     public void addSearchResults(Iterable<SearchResult> searchResults){
         for (SearchResult sr : searchResults){
+           if(sr.isRated()){
+                ImageIcon icon = new ImageIcon("image-icon.png");
+                sr.setImageIcon(icon);
+                sr.setIcon(icon);
+           }
             searchView.getPopupMenu().add(sr);
             searchView.getSearchResultList().add(sr);
         }
+    }
+    public void setScorePresenter(ScorePresenter scorePresenter){
+        this.scorePresenter = scorePresenter;
     }
 }

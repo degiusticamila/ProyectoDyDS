@@ -16,9 +16,7 @@ public class ScoreModel {
     }
     public void updateScore(String titleSelected, Integer score){
         DataBase.saveScore(titleSelected,score);
-        System.out.println("puntaje guardado"+"\n");
         notifySaveLocallyFinished();
-        System.out.println("notificamos al presentador que ya terminanos de guardar el puntaje"+"\n");
     }
     public ArrayList<RankedSeries> getRatedSeries(){
         Object[] ratedTitleArray;
@@ -26,13 +24,16 @@ public class ScoreModel {
         //tengo todos los titulos que tienen una calificacion asociada.
         ratedTitleArray = DataBase.getTitlesScores().stream().sorted().toArray();
 
-        //ahora puedo pedirle su puntaje y su fecha. ? siii
         for(Object obj: ratedTitleArray){
             RankedSeries rankedSeries = new RankedSeries((String) obj,DataBase.getScores((String)obj).intValue());
             rankedSeries.setLastModificationDate(DataBase.getDates((String)obj));
             ratedSeriesModel.add(rankedSeries);
         }
-
         return ratedSeriesModel;
+    }
+    public Integer getScore(String title){
+        Integer score = -1;
+        score = DataBase.getScores(title);
+        return score;
     }
 }

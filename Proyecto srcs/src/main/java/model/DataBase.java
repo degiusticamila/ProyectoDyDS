@@ -258,6 +258,9 @@ public class DataBase {
       // Process the result set
       if (rs.next()) {
         score = rs.getInt("score");
+      }else{
+        //ojo con este nuevo cambio.
+        return -1;
       }
     } catch (SQLException e) {
       throw new RuntimeException(e);

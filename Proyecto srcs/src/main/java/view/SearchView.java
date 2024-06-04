@@ -26,7 +26,6 @@ public class SearchView extends JPanel implements View{
     private LinkedList<SearchResult> searchResults;
     private JButton scoreButton;
     public SearchView(){
-
         initComponents();
         showView();
         initListeners();
@@ -111,7 +110,6 @@ public class SearchView extends JPanel implements View{
         for(SearchResult sr : searchResults){
             sr.addActionListener(actionEvent -> {
                 searchResultActual = sr;
-                //cambiar para que sea clean x el parametro.
                 pagePresenter.onEventPopupSelected(sr);
             });
         }
@@ -150,5 +148,8 @@ public class SearchView extends JPanel implements View{
     //No se como cambiarlo para que sea clean.
     public SearchResult getSearchResultActual(){
         return searchResultActual;
+    }
+    public void addSearchOptionsMenu(SearchResult sr){
+        searchOptionsMenu.add(sr);
     }
 }

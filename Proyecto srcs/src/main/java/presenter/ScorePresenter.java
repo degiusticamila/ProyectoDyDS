@@ -24,7 +24,6 @@ public class ScorePresenter {
         this.scoreModel = scoreModel;
     }
     public void onEventClickedScoreButton(Integer score, SearchResult selectedSeries){
-        System.out.println("score model: "+scoreModel);
         scoreModel.addListener(new ModelListener() {
             @Override
             public void hasFinished() {
@@ -35,9 +34,11 @@ public class ScorePresenter {
         actualTitle = pagePresenter.getLastSelectedResultTitle();
         actualRankedSeries = new RankedSeries(actualTitle,score);
         scoreModel.updateScore(actualTitle,score);
+
     }
     private void showNewScore(SearchResult selectedSeries){
        updateScoreComboBox();
+
         addRatedSeries(actualRankedSeries);
         String date = actualRankedSeries.getLastModificationDateFormatted();
         String title = actualRankedSeries.getSeriesTitle();
@@ -45,31 +46,36 @@ public class ScorePresenter {
 
         scoreView.getRatedSeriesComboBox().addItem(title+" "+ score +" "+ date);
 
+
     }
     public void updateScoreComboBox(){
         scoreView.getRatedSeriesComboBox().setModel(new DefaultComboBoxModel());
         ratedSeries = scoreModel.getRatedSeries();
+
         sortRatedSeries(ratedSeries);
-        System.out.println("rated series: "+ratedSeries);
+
         for(RankedSeries rankedSeries : ratedSeries){
             scoreView.getRatedSeriesComboBox().addItem(rankedSeries.getSeriesTitle()+" "+rankedSeries.getScore()+" "+rankedSeries.getLastModificationDateFormatted());
         }
-
     }
     private void sortRatedSeries(ArrayList<RankedSeries> ratedSeries){
-        //ordenar de menor a mayor puntaje.
+        // Ordenar de menor a mayor puntaje
+        ratedSeries.sort((rs1, rs2) -> Integer.compare(rs1.getScore(), rs2.getScore()));
     }
     private void createRatedSeriesList(){
         ratedSeries = new ArrayList<>();
     }
-    private RankedSeries addRatedSeries(RankedSeries rankedSeries){
+    private void addRatedSeries(RankedSeries rankedSeries){
         ratedSeries.add(rankedSeries);
-        return rankedSeries;
     }
-    private ArrayList<RankedSeries> getRatedSeries(){
+
+    public ArrayList<RankedSeries> getRatedSeries(){
         return ratedSeries;
     }
     public void setPagePresenter(PagePresenter pagePresenter){
         this.pagePresenter = pagePresenter;
+    }
+    public Integer getScoreModel(String title){
+        return scoreModel.getScore(title);
     }
 }

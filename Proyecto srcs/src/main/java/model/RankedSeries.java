@@ -32,4 +32,5 @@ public class RankedSeries {
     public String getSeriesTitle(){
         return seriesTitle;
     }
+
 }
