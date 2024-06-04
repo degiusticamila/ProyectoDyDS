@@ -68,7 +68,7 @@ public class Window extends JFrame {
             searchView.setPagePresenter(pagePresenter);
             searchView.setSavePresenter(savePresenter);
             searchView.setScorePresenter(scorePresenter);
-
+            scoreView.setScorePresenter(scorePresenter);
 
 
             String testTitle = "TestTitle";

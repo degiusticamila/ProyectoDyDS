@@ -136,6 +136,7 @@ public class StorageView extends JPanel implements View {
         saveChanges = new JMenuItem("Save changes!");
         storedInfoPopup.add(saveChanges);
     }
+    //esto necesito para que me aparezcan las rankeadas al toque
     private void updateStorageComboBox(){
         storagePresenter.showSavedSeries();
     }

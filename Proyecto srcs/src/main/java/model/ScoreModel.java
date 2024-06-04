@@ -26,8 +26,7 @@ public class ScoreModel {
         //tengo todos los titulos que tienen una calificacion asociada.
         ratedTitleArray = DataBase.getTitlesScores().stream().sorted().toArray();
 
-        //ahora puedo pedirle su puntaje y su fecha. ?
-
+        //ahora puedo pedirle su puntaje y su fecha. ? siii
         for(Object obj: ratedTitleArray){
             RankedSeries rankedSeries = new RankedSeries((String) obj,DataBase.getScores((String)obj).intValue());
             rankedSeries.setLastModificationDate(DataBase.getDates((String)obj));

@@ -41,16 +41,21 @@ public class ScorePresenter {
         scoreModel.updateScore(actualTitle,score);
     }
     private void showNewScore(SearchResult selectedSeries){
-       scoreView.getRatedSeriesComboBox().setModel(new DefaultComboBoxModel());
-        for(RankedSeries rankedSeries : ratedSeries){
-            scoreView.getRatedSeriesComboBox().addItem(rankedSeries.getSeriesTitle()+" "+rankedSeries.getScore()+" "+rankedSeries.getLastModificationDateFormatted());
-        }
+       updateScoreComboBox();
         addRatedSeries(actualRankedSeries);
         String date = actualRankedSeries.getLastModificationDateFormatted();
         String title = actualRankedSeries.getSeriesTitle();
         Integer score = actualRankedSeries.getScore();
 
         scoreView.getRatedSeriesComboBox().addItem(title+" "+ score +" "+ date);
+    }
+    public void updateScoreComboBox(){
+        scoreView.getRatedSeriesComboBox().setModel(new DefaultComboBoxModel());
+        ratedSeries = scoreModel.getRatedSeries();
+        System.out.println("rated series: "+ratedSeries);
+        for(RankedSeries rankedSeries : ratedSeries){
+            scoreView.getRatedSeriesComboBox().addItem(rankedSeries.getSeriesTitle()+" "+rankedSeries.getScore()+" "+rankedSeries.getLastModificationDateFormatted());
+        }
     }
     private void createRatedSeriesList(){
         ratedSeries = new ArrayList<>();
