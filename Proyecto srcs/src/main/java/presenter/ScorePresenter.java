@@ -18,6 +18,7 @@ public class ScorePresenter {
     private ArrayList<RankedSeries> ratedSeries;
     private PagePresenter pagePresenter;
     private RankedSeries actualRankedSeries;
+    private boolean isListenerRegistered = false;
     public ScorePresenter(SearchView searchView, ScoreView scoreView, ScoreModel scoreModel){
         this.searchView = searchView;
         this.scoreView = scoreView;
@@ -27,33 +28,27 @@ public class ScorePresenter {
         scoreModel.addListener(new ModelListener() {
             @Override
             public void hasFinished() {
-                showNewScore(selectedSeries);
-            }
+                    showNewScore(selectedSeries);
+                }
         });
-        ratedSeries = scoreModel.getRatedSeries();
+        //ratedSeries = scoreModel.getRatedSeries();
         actualTitle = pagePresenter.getLastSelectedResultTitle();
         actualRankedSeries = new RankedSeries(actualTitle,score);
         scoreModel.updateScore(actualTitle,score);
-
+        ratedSeries = scoreModel.getRatedSeries();
     }
     private void showNewScore(SearchResult selectedSeries){
        updateScoreComboBox();
-
-        addRatedSeries(actualRankedSeries);
-        String date = actualRankedSeries.getLastModificationDateFormatted();
-        String title = actualRankedSeries.getSeriesTitle();
-        Integer score = actualRankedSeries.getScore();
-
-        scoreView.getRatedSeriesComboBox().addItem(title+" "+ score +" "+ date);
-
-
+        //addRatedSeries(actualRankedSeries);
+        //String date = actualRankedSeries.getLastModificationDateFormatted();
+        //String title = actualRankedSeries.getSeriesTitle();
+        //Integer score = actualRankedSeries.getScore();
+        //scoreView.getRatedSeriesComboBox().addItem(title+" "+ score +" "+ date);
     }
     public void updateScoreComboBox(){
         scoreView.getRatedSeriesComboBox().setModel(new DefaultComboBoxModel());
         ratedSeries = scoreModel.getRatedSeries();
-
         sortRatedSeries(ratedSeries);
-
         for(RankedSeries rankedSeries : ratedSeries){
             scoreView.getRatedSeriesComboBox().addItem(rankedSeries.getSeriesTitle()+" "+rankedSeries.getScore()+" "+rankedSeries.getLastModificationDateFormatted());
         }
