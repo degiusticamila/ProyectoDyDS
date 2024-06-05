@@ -72,7 +72,6 @@ public class Window extends JFrame {
             scoreView.setScorePresenter(scorePresenter);
 
 
-
             generalView.setVisible(true);
         });
     }

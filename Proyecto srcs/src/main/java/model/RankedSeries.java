@@ -1,9 +1,10 @@
 package model;
 
+import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RankedSeries {
+public class RankedSeries extends JMenuItem {
     private String seriesTitle;
     private Integer score;
     private Date lastModificationDate;
@@ -31,6 +32,10 @@ public class RankedSeries {
     }
     public String getSeriesTitle(){
         return seriesTitle;
+    }
+    @Override
+    public String toString() {
+        return seriesTitle+" "+score+" "+getLastModificationDateFormatted();
     }
 
 }

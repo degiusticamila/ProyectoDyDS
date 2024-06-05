@@ -21,19 +21,12 @@ public class ScoreModel {
     public ArrayList<RankedSeries> getRatedSeries(){
         Object[] ratedTitleArray;
         ratedSeriesModel = new ArrayList<>();
-        //tengo todos los titulos que tienen una calificacion asociada.
         ratedTitleArray = DataBase.getTitlesScores().stream().sorted().toArray();
-
         for(Object obj: ratedTitleArray){
             RankedSeries rankedSeries = new RankedSeries((String) obj,DataBase.getScores((String)obj).intValue());
             rankedSeries.setLastModificationDate(DataBase.getDates((String)obj));
             ratedSeriesModel.add(rankedSeries);
         }
         return ratedSeriesModel;
-    }
-    public Integer getScore(String title){
-        Integer score = -1;
-        score = DataBase.getScores(title);
-        return score;
     }
 }

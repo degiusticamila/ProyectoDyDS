@@ -46,9 +46,6 @@ public class SearchView extends JPanel implements View{
     public JTextField getSeriesToSearchTextField(){
         return seriesToSearchTextField;
     }
-    public JButton getGoSearchButton(){
-        return goSearchButton;
-    }
     public JTextPane getCurrentSearchTextPane(){
         return currentSearchTextPane;
     }
@@ -71,7 +68,6 @@ public class SearchView extends JPanel implements View{
         initializeGoSearchButton();
         initializeSaveLocallyButton();
         initializeScoreButton();
-
     }
     public void setSearchPresenter(SearchPresenter searchPresenter){
         this.searchPresenter = searchPresenter;
@@ -129,7 +125,7 @@ public class SearchView extends JPanel implements View{
         scoreButton.addActionListener(actionEvent ->{
             String input = JOptionPane.showInputDialog(searchPanel, "Ingrese un número:");
             Integer score = Integer.parseInt(input);
-
+            //si el score no esta dentro de 0 y 10.
             scorePresenter.onEventClickedScoreButton(score,searchResultActual);
         });
     }
@@ -145,11 +141,10 @@ public class SearchView extends JPanel implements View{
         scoreButton = new JButton("Define score");
         searchPanel.add(scoreButton);
     }
-    //No se como cambiarlo para que sea clean.
-    public SearchResult getSearchResultActual(){
-        return searchResultActual;
-    }
     public void addSearchOptionsMenu(SearchResult sr){
         searchOptionsMenu.add(sr);
+    }
+    public void notifyUnexpectedEvent(String message){
+        JOptionPane.showMessageDialog(this,message);
     }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import model.RankedSeries;
 import presenter.ScorePresenter;
 
 import javax.swing.*;
@@ -8,14 +9,14 @@ import java.awt.*;
 public class ScoreView extends JPanel implements View{
 
     private JPanel scorePanel;
-    //private ScoreItem scoreItem;
-    private JButton modifyScore;
-    private JComboBox ratedSeriesComboBox;
+    private JList<RankedSeries> rankedSeriesJList;
+    private JComboBox<RankedSeries> ratedSeriesComboBox;
     private ScorePresenter scorePresenter;
+    private JScrollPane scrollPaneRankedList;
 
     public ScoreView(){
         initComponents();
-       //initListeners();
+       initListeners();
         showView();
     }
     @Override
@@ -25,22 +26,32 @@ public class ScoreView extends JPanel implements View{
     public void initComponents(){
         createScorePanel();
         createRatedSeriesComboBox();
-        createModifyScoreButton();
+        //createRatedSeriesJList();
     }
     public void initListeners(){
         //acá si se elige una serie calificada se tiene que poder modificar el puntaje
+        //acá hay que volver a la 1er pestaña y actualizar de la searchview el texto
+        //initializeRankedItemsComboBox();
     }
     private void createScorePanel(){
         scorePanel = new JPanel();
     }
     private void createRatedSeriesComboBox(){
-        //se tiene que crear una sola vez y dsp crearse con las cosas que tenia antes.
-        ratedSeriesComboBox = new JComboBox<>();
+        ratedSeriesComboBox = new JComboBox<RankedSeries>();
         ratedSeriesComboBox.setPreferredSize(new Dimension(400, 30));
         scorePanel.add(ratedSeriesComboBox);
     }
-    private void createModifyScoreButton(){
-        modifyScore = new JButton();
+    private void createRatedSeriesJList(){
+        rankedSeriesJList = new JList<>();
+        rankedSeriesJList.setPreferredSize(new Dimension(400, 30));
+        scorePanel.add(rankedSeriesJList);
+        setRankedSeriesModel();
+    }
+    private void setRankedSeriesModel(){
+        DefaultListModel<RankedSeries> listModel = new DefaultListModel<>();
+        rankedSeriesJList.setModel(listModel);
+        scrollPaneRankedList = new JScrollPane(rankedSeriesJList);
+        scorePanel.add(scrollPaneRankedList);
     }
     public JPanel getScorePanel(){
         return scorePanel;
@@ -48,10 +59,28 @@ public class ScoreView extends JPanel implements View{
     public JComboBox getRatedSeriesComboBox(){
         return ratedSeriesComboBox;
     }
+    public JList getRatedSeriesList(){
+        return rankedSeriesJList;
+    }
     public void setScorePresenter(ScorePresenter scorePresenter){
         this.scorePresenter = scorePresenter;
-        System.out.println("Scorepresenter: "+scorePresenter);
-        scorePresenter.updateScoreComboBox();
-    }
 
+        scorePresenter.updateScoreComboBox();
+        //initializeRankedItemsComboBox();
+        ratedSeriesComboBox.addActionListener(actionEvent -> {
+            RankedSeries selectedSeries = (RankedSeries) ratedSeriesComboBox.getSelectedItem();
+            if (selectedSeries != null) {
+                scorePresenter.onEventComboBoxRankSelected(selectedSeries);
+            }
+        });
+    }
+    public void initializeRankedItemsComboBox(){
+
+        for(RankedSeries rankedSeries : scorePresenter.getRatedSeries()){
+            System.out.println("for del listener");
+            rankedSeries.addActionListener(actionEvent ->{
+                scorePresenter.onEventComboBoxRankSelected(rankedSeries);
+            });
+        }
+    }
 }

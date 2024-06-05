@@ -39,11 +39,15 @@ public class SearchPresenter {
     private void showSearchResult() {
         Response<String> lastSearchResponse = searchModel.getLastSearchResponse();
         JsonArray jsonResults = Utilities.calculateJSonObjects(lastSearchResponse);
-        searchView.createJPopMenu();
-        Iterable<SearchResult> searchResults = Utilities.calculateSearchResults(jsonResults);
-        searchView.createSearchResultList();
-        addSearchResults(searchResults);
-        searchView.showInfoPopup();
+        if(jsonResults.isEmpty()) {
+            searchView.notifyUnexpectedEvent("No results found.");
+        }else {
+            searchView.createJPopMenu();
+            Iterable<SearchResult> searchResults = Utilities.calculateSearchResults(jsonResults);
+            searchView.createSearchResultList();
+            addSearchResults(searchResults);
+            searchView.showInfoPopup();
+        }
     }
     public void addSearchResults(Iterable<SearchResult> searchResults){
         for (SearchResult sr : searchResults){
