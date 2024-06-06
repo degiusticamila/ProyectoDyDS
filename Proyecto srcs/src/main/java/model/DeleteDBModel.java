@@ -7,7 +7,6 @@ public class DeleteDBModel {
     public void deleteItem(String titleSelectToDelete){
         DataBase.deleteEntry(titleSelectToDelete);
         notifyPageFinishedListener();
-       // DataBase.deleteEntry(seriesComboBox.getSelectedItem().toString());
     }
     private void notifyPageFinishedListener(){
         for(ModelListener l : deleteListeners){

@@ -23,7 +23,6 @@ public class SearchModel{
          searchAPI = retrofit.create(WikipediaSearchAPI.class);
     }
     public void searchInWikipedia(String termToSearch){
-        System.out.println("Entra al metodo buscar en Wikipedia");
         try {
             callForSearchResponse = searchAPI.searchForTerm(termToSearch + " (Tv series) articletopic:\"television\"").execute();
         } catch (IOException e) {
@@ -42,5 +41,4 @@ public class SearchModel{
     public void addListener(ModelListener listener) {
         this.listeners.add(listener);
     }
-
 }

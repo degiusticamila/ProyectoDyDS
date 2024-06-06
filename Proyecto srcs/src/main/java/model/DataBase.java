@@ -242,26 +242,22 @@ public class DataBase {
       }
     }
   }
-  public static Integer getScores(String title) {
+  public static String getScores(String title) {
     Connection connection = null;
-    Integer score = null;
 
     try {
       connection = DriverManager.getConnection("jdbc:sqlite:./dictionary.db");
-      Statement statement = connection.createStatement();
+      String query = "SELECT score FROM scores WHERE title = ?";
+      PreparedStatement preparedStatement = connection.prepareStatement(query);
+      preparedStatement.setString(1, title);
+      ResultSet rs = preparedStatement.executeQuery();
 
-      statement.setQueryTimeout(30);  // set timeout to 30 sec.
+      rs.next();
+      if(rs.getString("score") != null)
+        return rs.getString("score");
+      else
+        return "-1";
 
-      // Execute the query to get the score for the given title
-      ResultSet rs = statement.executeQuery("SELECT score FROM scores WHERE title = '" + title + "'");
-
-      // Process the result set
-      if (rs.next()) {
-        score = rs.getInt("score");
-      }else{
-        //ojo con este nuevo cambio.
-        return -1;
-      }
     } catch (SQLException e) {
       throw new RuntimeException(e);
     } finally {
@@ -273,7 +269,7 @@ public class DataBase {
         System.err.println(e);
       }
     }
-    return score;
+    //return score;
   }
   public static Date getDates(String title) {
     Connection connection = null;

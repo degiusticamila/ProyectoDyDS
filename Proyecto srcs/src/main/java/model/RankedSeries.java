@@ -37,5 +37,4 @@ public class RankedSeries extends JMenuItem {
     public String toString() {
         return seriesTitle+" "+score+" "+getLastModificationDateFormatted();
     }
-
 }

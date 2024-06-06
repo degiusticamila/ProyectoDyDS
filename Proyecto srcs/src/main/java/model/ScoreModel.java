@@ -23,7 +23,10 @@ public class ScoreModel {
         ratedSeriesModel = new ArrayList<>();
         ratedTitleArray = DataBase.getTitlesScores().stream().sorted().toArray();
         for(Object obj: ratedTitleArray){
-            RankedSeries rankedSeries = new RankedSeries((String) obj,DataBase.getScores((String)obj).intValue());
+            String score = DataBase.getScores((String) obj);
+            Integer parseScore = Integer.parseInt(score);
+
+            RankedSeries rankedSeries = new RankedSeries((String) obj,parseScore);
             rankedSeries.setLastModificationDate(DataBase.getDates((String)obj));
             ratedSeriesModel.add(rankedSeries);
         }
