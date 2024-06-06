@@ -1,13 +1,12 @@
 package presenter;
 
-import dyds.tvseriesinfo.fulllogic.SearchResult;
+import utils.SearchResult;
 import model.ModelListener;
 import model.RankedSeries;
 import view.ScoreView;
 import view.SearchView;
 import model.ScoreModel;
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 public class ScorePresenter {
     private SearchView searchView;

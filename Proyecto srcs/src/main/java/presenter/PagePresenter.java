@@ -1,6 +1,6 @@
 package presenter;
 
-import dyds.tvseriesinfo.fulllogic.SearchResult;
+import utils.SearchResult;
 import model.ModelListener;
 import model.PageModel;
 import view.SearchView;
@@ -12,8 +12,6 @@ public class PagePresenter {
     private SearchView searchView;
     private String lastText;
     private String lastSelectedResultTitle;
-
-
     public PagePresenter(SearchView searchView, PageModel pageModel){
         this.searchView = searchView;
         this.pageModel = pageModel;
@@ -36,6 +34,9 @@ public class PagePresenter {
         lastSelectedResultTitle = searchResult.title;
         setLastSelectedResultTitle(lastSelectedResultTitle);
 
+       updateSearchView();
+    }
+    private void updateSearchView(){
         searchView.getCurrentSearchTextPane().setText(lastText);
         searchView.getCurrentSearchTextPane().setCaretPosition(0);
     }

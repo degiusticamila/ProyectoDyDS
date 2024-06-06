@@ -33,7 +33,6 @@ public class StoragePresenter {
         storageView.setWatingStatus();
 
     }
-    //IDEM PARA SERIES CALIFICADAS!
     public void showSavedSeries(){
         storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(saveModel.getSavedSeries()));
     }

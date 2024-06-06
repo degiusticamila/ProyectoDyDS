@@ -10,23 +10,23 @@ import javax.swing.*;
 public class SavePresenter {
     private SearchView searchView;
     private StorageView storageView;
-    private SaveModel dataBaseModel;
+    private SaveModel saveModel;
     private PagePresenter pagePresenter;
 
-    public SavePresenter(SearchView searchView, StorageView storageView, SaveModel dataBaseModel){
+    public SavePresenter(SearchView searchView, StorageView storageView, SaveModel saveModel){
         this.searchView = searchView;
         this.storageView = storageView;
-        this.dataBaseModel = dataBaseModel;
+        this.saveModel = saveModel;
     }
     public void onEventSaveLocallyButton(){
-        dataBaseModel.addListener(new ModelListener() {
+        saveModel.addListener(new ModelListener() {
             @Override
             public void hasFinished() {
                 showTextInStorageView();
             }
         });
         storageView.setWorkingStatus();
-        dataBaseModel.saveLocally(pagePresenter.getLastSelectedResultTitle(), pagePresenter.getLastText());
+        saveModel.saveLocally(pagePresenter.getLastSelectedResultTitle(), pagePresenter.getLastText());
         storageView.setWatingStatus();
     }
     private void showTextInStorageView(){
@@ -46,7 +46,7 @@ public class SavePresenter {
     }
     private void updateSeriesComboBox(){
         //mejorar lo de pedir al modelo las series.
-        storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(dataBaseModel.getSavedSeries()));
+        storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(saveModel.getSavedSeries()));
         String title = pagePresenter.getLastSelectedResultTitle();
         storageView.getSeriesComboBox().addItem(title);
     }

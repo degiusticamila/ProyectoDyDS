@@ -11,17 +11,10 @@ public class SearchModel{
     private WikipediaSearchAPI searchAPI;
     private Response<String> callForSearchResponse;
     private ArrayList<ModelListener> listeners = new ArrayList<>();
-    public SearchModel(){
-        createWikiSearchAPI();
+    public SearchModel(WikipediaSearchAPI searchAPI){
+        this.searchAPI = searchAPI;
     }
-    private void createWikiSearchAPI(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://en.wikipedia.org/w/")
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
 
-         searchAPI = retrofit.create(WikipediaSearchAPI.class);
-    }
     public void searchInWikipedia(String termToSearch){
         try {
             callForSearchResponse = searchAPI.searchForTerm(termToSearch + " (Tv series) articletopic:\"television\"").execute();

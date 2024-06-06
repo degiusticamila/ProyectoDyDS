@@ -29,9 +29,6 @@ public class ScoreView extends JPanel implements View{
         //createRatedSeriesJList();
     }
     public void initListeners(){
-        //acá si se elige una serie calificada se tiene que poder modificar el puntaje
-        //acá hay que volver a la 1er pestaña y actualizar de la searchview el texto
-        //initializeRankedItemsComboBox();
     }
     private void createScorePanel(){
         scorePanel = new JPanel();
@@ -75,7 +72,6 @@ public class ScoreView extends JPanel implements View{
         });
     }
     public void initializeRankedItemsComboBox(){
-
         for(RankedSeries rankedSeries : scorePresenter.getRatedSeries()){
             System.out.println("for del listener");
             rankedSeries.addActionListener(actionEvent ->{

@@ -13,7 +13,7 @@ import java.util.Set;
 
 import javax.swing.*;
 
-import dyds.tvseriesinfo.fulllogic.SearchResult;
+import utils.SearchResult;
 import model.DataBase;
 import model.WikipediaPageAPI;
 import model.WikipediaSearchAPI;

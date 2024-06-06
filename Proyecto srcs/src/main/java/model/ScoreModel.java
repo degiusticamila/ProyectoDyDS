@@ -20,8 +20,9 @@ public class ScoreModel {
     }
     public ArrayList<RankedSeries> getRatedSeries(){
         Object[] ratedTitleArray;
-        ratedSeriesModel = new ArrayList<>();
+
         ratedTitleArray = DataBase.getTitlesScores().stream().sorted().toArray();
+        ratedSeriesModel = new ArrayList<>();
         for(Object obj: ratedTitleArray){
             String score = DataBase.getScores((String) obj);
             Integer parseScore = Integer.parseInt(score);

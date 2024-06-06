@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 
 public class StorageView extends JPanel implements View {
     private StoragePresenter storagePresenter;
-    private SaveModel dataBaseModel;
     private JPopupMenu storedInfoPopup;
     private JTextPane savedSeriesTextPane;
     private JPanel storagePanel;

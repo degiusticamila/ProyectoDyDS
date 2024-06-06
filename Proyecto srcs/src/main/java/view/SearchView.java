@@ -1,6 +1,6 @@
 package view;
 
-import dyds.tvseriesinfo.fulllogic.SearchResult;
+import utils.SearchResult;
 import presenter.PagePresenter;
 import presenter.SavePresenter;
 import presenter.ScorePresenter;

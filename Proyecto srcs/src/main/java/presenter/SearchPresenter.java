@@ -1,15 +1,13 @@
 package presenter;
 import com.google.gson.JsonArray;
-import dyds.tvseriesinfo.fulllogic.SearchResult;
+import utils.SearchResult;
 import model.ModelListener;
-import model.RankedSeries;
 import view.SearchView;
 import model.SearchModel;
 import retrofit2.Response;
 import utils.Utilities;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class SearchPresenter {
     private SearchView searchView;

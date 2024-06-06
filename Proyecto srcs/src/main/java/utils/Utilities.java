@@ -4,12 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import dyds.tvseriesinfo.fulllogic.SearchResult;
 import model.DataBase;
-import model.RankedSeries;
 import retrofit2.Response;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
@@ -28,7 +25,7 @@ public class Utilities {
         LinkedList<SearchResult> searchResultsList = new LinkedList<SearchResult>();
 
         for (JsonElement je : jsonResults) {
-            System.out.println("je"+je.toString());
+
             JsonObject searchResult = je.getAsJsonObject();
             String searchResultTitle = searchResult.get("title").getAsString();
             String searchResultPageId = searchResult.get("pageid").getAsString();

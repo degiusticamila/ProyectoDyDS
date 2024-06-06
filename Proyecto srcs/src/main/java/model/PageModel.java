@@ -1,6 +1,6 @@
 package model;
 
-import dyds.tvseriesinfo.fulllogic.SearchResult;
+import utils.SearchResult;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;

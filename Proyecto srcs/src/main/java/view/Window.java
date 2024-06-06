@@ -47,7 +47,8 @@ public class Window extends JFrame {
             Window generalView = new Window(searchView,storageView,scoreView);
 
             PageModel pageModel = new PageModel();
-            SearchModel searchModel = new SearchModel();
+            WikipediaSearchAPI searchAPI = WikipediaSearchAPIService.createWikiSearchApi();
+            SearchModel searchModel = new SearchModel(searchAPI);
             SaveModel dataBaseModel = new SaveModel();
             GetDBModel dbModel = new GetDBModel();
             DeleteDBModel deleteDBModel = new DeleteDBModel();
