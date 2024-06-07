@@ -4,7 +4,13 @@ import java.util.ArrayList;
 
 public class GetDBModel {
     private String lastExtract;
-    private ArrayList<ModelListener> listeners = new ArrayList<>();
+    private ArrayList<ModelListener> listeners;
+    private DataBaseInterface dataBase;
+
+    public GetDBModel(){
+        dataBase = new DataBaseImpl();
+        listeners = new ArrayList<>();
+    }
     public void addListener(ModelListener listener) {
         this.listeners.add(listener);
     }
@@ -14,7 +20,7 @@ public class GetDBModel {
         }
     }
     public void getExtractText(String selectedTitle){
-        lastExtract = DataBaseImpl.getExtract(selectedTitle);
+        lastExtract = dataBase.getExtract(selectedTitle);
         notifyExtractFinished();
     }
     public String getLastExtract(){

@@ -3,9 +3,9 @@ package model;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DataBaseImpl {
+public class DataBaseImpl implements DataBaseInterface{
 
-  public static void loadDatabase() {
+  public void loadDatabase() {
     String url = "jdbc:sqlite:./dictionary.db";
 
     try (Connection connection = DriverManager.getConnection(url)) {
@@ -29,7 +29,7 @@ public class DataBaseImpl {
     }
   }
 
-  public static ArrayList<String> getTitles()
+  public ArrayList<String> getTitles()
   {
     ArrayList<String> titles = new ArrayList<>();
     Connection connection = null;
@@ -61,7 +61,7 @@ public class DataBaseImpl {
     }
   }
 
-  public static void saveInfo(String title, String extract)
+  public void saveInfo(String title, String extract)
   {
     Connection connection = null;
     try
@@ -92,7 +92,7 @@ public class DataBaseImpl {
     }
   }
 
-  public static String getExtract(String title)
+  public  String getExtract(String title)
   {
     Connection connection = null;
     try
@@ -123,7 +123,7 @@ public class DataBaseImpl {
     }
     return null;
   }
-  public static void deleteEntry(String title)
+  public  void deleteEntry(String title)
   {
     Connection connection = null;
     try
@@ -151,7 +151,7 @@ public class DataBaseImpl {
       }
     }
   }
-  public static void saveScore(String title, Integer score){
+  public void saveScore(String title, Integer score){
     Connection connection = null;
 
     try {
@@ -173,7 +173,7 @@ public class DataBaseImpl {
       }
     }
   }
-  public static String getScores(String title) {
+  public String getScores(String title) {
     Connection connection = null;
 
     try {
@@ -201,7 +201,7 @@ public class DataBaseImpl {
       }
     }
   }
-  public static Date getDates(String title) {
+  public Date getDates(String title) {
     Connection connection = null;
     Date date = null;
 
@@ -229,7 +229,7 @@ public class DataBaseImpl {
     }
     return date;
   }
-  public static ArrayList<String> getTitlesScores()
+  public ArrayList<String> getTitlesScores()
   {
     ArrayList<String> scoreTitles = new ArrayList<>();
     Connection connection = null;

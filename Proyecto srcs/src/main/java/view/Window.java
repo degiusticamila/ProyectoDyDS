@@ -31,8 +31,9 @@ public class Window extends JFrame {
     }
     public static void main(String[] args) {
         Utilities.setNimbusTheme();
+        DataBaseInterface database = new DataBaseImpl();
         SwingUtilities.invokeLater(() -> {
-            DataBaseImpl.loadDatabase();
+            database.loadDatabase();
 
             SearchView searchView = new SearchView();
             StorageView storageView = new StorageView();

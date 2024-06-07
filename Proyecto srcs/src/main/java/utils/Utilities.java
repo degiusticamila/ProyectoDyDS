@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import model.DataBaseImpl;
+import model.DataBaseInterface;
 import retrofit2.Response;
 
 import javax.swing.*;
@@ -23,7 +24,7 @@ public class Utilities {
     }
     public static Iterable<SearchResult> calculateSearchResults(JsonArray jsonResults){
         LinkedList<SearchResult> searchResultsList = new LinkedList<SearchResult>();
-
+        DataBaseInterface dataBase = new DataBaseImpl();
         for (JsonElement je : jsonResults) {
 
             JsonObject searchResult = je.getAsJsonObject();
@@ -34,7 +35,7 @@ public class Utilities {
 
             SearchResult sr = new SearchResult(searchResultTitle, searchResultPageId, searchResultSnippet);
 
-            String score = DataBaseImpl.getScores(searchResultTitle);
+            String score = dataBase.getScores(searchResultTitle);
 
             Integer scoreValue = Integer.parseInt(score);
 

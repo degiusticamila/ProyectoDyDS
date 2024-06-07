@@ -3,14 +3,19 @@ package model;
 import java.util.ArrayList;
 
 public class SaveModel {
-    private ArrayList<ModelListener> dataBaseListeners = new ArrayList<>();
+    private ArrayList<ModelListener> dataBaseListeners;
+    private DataBaseInterface dataBase;
+    public SaveModel(){
+        dataBaseListeners = new ArrayList<>();
+        dataBase = new DataBaseImpl();
+    }
     public void saveLocally(String selectedResultTitle,String text){
-        DataBaseImpl.saveInfo(selectedResultTitle.replace("'", "`"), text);  //Dont forget the ' sql problem
+        dataBase.saveInfo(selectedResultTitle.replace("'", "`"), text);
         notifySaveLocallyFinished();
     }
     public Object[] getSavedSeries(){
         Object[] savedSeriesArray;
-        savedSeriesArray = DataBaseImpl.getTitles().stream().sorted().toArray();
+        savedSeriesArray = dataBase.getTitles().stream().sorted().toArray();
         return savedSeriesArray;
     }
     public void addListener(ModelListener listener) {

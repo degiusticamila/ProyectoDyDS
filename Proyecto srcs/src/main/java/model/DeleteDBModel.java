@@ -3,9 +3,14 @@ package model;
 import java.util.ArrayList;
 
 public class DeleteDBModel {
-    private ArrayList<ModelListener> deleteListeners = new ArrayList<>();
+    private ArrayList<ModelListener> deleteListeners;
+    private DataBaseInterface dataBase;
+    public DeleteDBModel(){
+        dataBase = new DataBaseImpl();
+        deleteListeners = new ArrayList<>();
+    }
     public void deleteItem(String titleSelectToDelete){
-        DataBaseImpl.deleteEntry(titleSelectToDelete);
+        dataBase.deleteEntry(titleSelectToDelete);
         notifyPageFinishedListener();
     }
     private void notifyPageFinishedListener(){
