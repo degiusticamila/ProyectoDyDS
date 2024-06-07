@@ -1,10 +1,9 @@
 package UnitTests;
 
 import Stubs.DataBaseStub;
-import model.DataBaseInterface;
 import org.junit.Before;
 
-public class DataBaseImplUnitTest {
+public class SearchModelUnitTest {
     private DataBaseStub dataBaseStub;
 
     @Before

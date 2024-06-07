@@ -41,8 +41,12 @@ public class Window extends JFrame {
             Window generalView = new Window(searchView,storageView,scoreView);
 
             PageModel pageModel = new PageModel();
+
+            //INYECCION DE DEPENDENCIAS.
             WikipediaSearchAPI searchAPI = WikipediaSearchAPIService.createWikiSearchApi();
-            SearchModel searchModel = new SearchModel(searchAPI);
+            SearchExecutor searchExecutor = new SearchExecutorImpl(searchAPI);
+            SearchModel searchModel = new SearchModel(searchExecutor);
+
             SaveModel dataBaseModel = new SaveModel();
             GetDBModel dbModel = new GetDBModel();
             DeleteDBModel deleteDBModel = new DeleteDBModel();
