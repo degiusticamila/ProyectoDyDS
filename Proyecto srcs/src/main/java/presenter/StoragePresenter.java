@@ -63,10 +63,8 @@ public class StoragePresenter {
     }
     private void updateChangesStorageView(String textToReplace){
         storageView.getSavedSeriesTextPane().setText(textToReplace);
-        JOptionPane.showMessageDialog(storageView, "Changes have been saved successfully.", "Save Confirmation", JOptionPane.INFORMATION_MESSAGE);
     }
     private void updateDeleteStorageView(){
         storageView.getSavedSeriesTextPane().setText("");
-        JOptionPane.showMessageDialog(storageView, "The series was successfully deleted", "Save Confirmation", JOptionPane.INFORMATION_MESSAGE);
     }
 }
