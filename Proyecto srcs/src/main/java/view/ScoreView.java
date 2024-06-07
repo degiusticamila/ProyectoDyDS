@@ -7,10 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ScoreView extends JPanel implements View{
-
     private JPanel scorePanel;
     private JComboBox<RankedSeries> ratedSeriesComboBox;
     private ScorePresenter scorePresenter;
+
     public ScoreView(){
         initComponents();
         showView();

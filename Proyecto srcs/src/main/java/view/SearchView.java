@@ -120,13 +120,18 @@ public class SearchView extends JPanel implements View{
             savePresenter.onEventSaveLocallyButton();
         });
     }
-    //no está terminado.
     private void initializeScoreButton(){
-        scoreButton.addActionListener(actionEvent ->{
-            String input = JOptionPane.showInputDialog(searchPanel, "Ingrese un número:");
-            Integer score = Integer.parseInt(input);
-            //si el score no esta dentro de 0 y 10.
-            scorePresenter.onEventClickedScoreButton(score,searchResultActual);
+        scoreButton.addActionListener(actionEvent -> {
+            String input = JOptionPane.showInputDialog(searchPanel, "Enter a score");
+            try {
+                Integer score = Integer.parseInt(input);
+                if (score < 1 || score > 10)
+                    JOptionPane.showMessageDialog(searchPanel, "The score must be between 1 and 10.", "Invalid Score", JOptionPane.WARNING_MESSAGE);
+                else
+                    scorePresenter.onEventClickedScoreButton(score, searchResultActual);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(searchPanel, "Por favor, ingrese un número válido.", "Entrada inválida", JOptionPane.ERROR_MESSAGE);
+            }
         });
     }
     private void createCurrentSearchPane(){
