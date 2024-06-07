@@ -1,6 +1,6 @@
 package view;
 
-import model.RankedSeries;
+import utils.RankedSeries;
 import presenter.ScorePresenter;
 
 import javax.swing.*;

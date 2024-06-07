@@ -26,12 +26,12 @@ public class SearchView extends JPanel implements View{
     private LinkedList<SearchResult> searchResults;
     private JButton scoreButton;
     public SearchView(){
-        initComponents();
         showView();
-        initListeners();
     }
     public void showView(){
+        initComponents();
         searchPanel.setVisible(true);
+        initListeners();
     }
     public void initComponents(){
         searchPanel = new JPanel();

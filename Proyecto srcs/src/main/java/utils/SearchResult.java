@@ -19,19 +19,11 @@ public class SearchResult extends JMenuItem {
         scoreValue = -1;
         scoreIcon = new ImageIcon();
     }
-    public String getTitle(){
-        return title;
-    }
     public void setScoreValue(Integer scoreValue){
         this.scoreValue = scoreValue;
     }
     public void setImageIcon(ImageIcon imageIcon){
-        System.out.println("entra al setter");
         this.scoreIcon = imageIcon;
-        System.out.println("score icon: "+scoreIcon);
-    }
-    public ImageIcon getScoreIcon(){
-        return scoreIcon;
     }
     public Boolean isRated(){
         if(scoreValue == -1){
@@ -39,8 +31,4 @@ public class SearchResult extends JMenuItem {
         }
         return true;
     }
-    public Integer getScoreValue(){
-        return scoreValue;
-    }
-
 }

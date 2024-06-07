@@ -2,7 +2,7 @@ package presenter;
 
 import utils.SearchResult;
 import model.ModelListener;
-import model.RankedSeries;
+import utils.RankedSeries;
 import view.ScoreView;
 import view.SearchView;
 import model.ScoreModel;
@@ -36,6 +36,7 @@ public class ScorePresenter {
     private void showNewScore(){
         createComboBoxRatedSeries();
         updateScoreComboBox();
+        updateSearchViewScore();
     }
     private void createComboBoxRatedSeries(){
         scoreView.getRatedSeriesComboBox().setModel(new DefaultComboBoxModel());
@@ -48,16 +49,16 @@ public class ScorePresenter {
             scoreView.getRatedSeriesComboBox().addItem(rankedSeries);
         }
     }
+    private void  updateSearchViewScore(){
+        JOptionPane.showMessageDialog(searchView ,"Score stored successfully!", "Save Confirmation", JOptionPane.INFORMATION_MESSAGE);
+    }
     private void sortRatedSeries(ArrayList<RankedSeries> ratedSeries){
         ratedSeries.sort((rs1, rs2) -> Integer.compare(rs1.getScore(), rs2.getScore()));
-    }
-    public ArrayList<RankedSeries> getRatedSeries(){
-        return ratedSeries;
     }
     public void setPagePresenter(PagePresenter pagePresenter){
         this.pagePresenter = pagePresenter;
     }
     public void onEventComboBoxRankSelected(RankedSeries selectedRankedSeries){
-        System.out.println("Seleccionaste un elemento rankeado :)");
+
     }
 }

@@ -31,6 +31,7 @@ public class SavePresenter {
     private void showTextInStorageView(){
         updateSavedSeriesTextPane();
         updateSeriesComboBox();
+        showOptionMessage();
     }
     public void setPagePresenter(PagePresenter pagePresenter){
         this.pagePresenter = pagePresenter;
@@ -46,5 +47,8 @@ public class SavePresenter {
         storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(saveModel.getSavedSeries()));
         String title = pagePresenter.getLastSelectedResultTitle();
         storageView.getSeriesComboBox().addItem(title);
+    }
+    private void showOptionMessage(){
+        JOptionPane.showMessageDialog(searchView ,"Series saved locally!", "Save Confirmation", JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -8,11 +8,7 @@ import javax.swing.*;
 
 
 public class Window extends JFrame {
-    public SearchView searchView;
-    public StorageView storageView;
-    public ScoreView scoreView;
     private JTabbedPane generalTabbedPane;
-
     public Window(SearchView searchView, StorageView storageView, ScoreView scoreView){
 
         createGeneralTabbedPane();
@@ -20,6 +16,9 @@ public class Window extends JFrame {
         generalTabbedPane.add("Stored Info", storageView.getStoragePanel());
         generalTabbedPane.add("Series Score",scoreView.getScorePanel());
 
+       initComponentsWindow();
+    }
+    private void initComponentsWindow(){
         setTitle("TV Series Info Repo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -42,7 +41,6 @@ public class Window extends JFrame {
 
             PageModel pageModel = new PageModel();
 
-            //INYECCION DE DEPENDENCIAS.
             WikipediaSearchAPI searchAPI = WikipediaSearchAPIService.createWikiSearchApi();
             SearchExecutor searchExecutor = new SearchExecutorImpl(searchAPI);
             SearchModel searchModel = new SearchModel(searchExecutor);
