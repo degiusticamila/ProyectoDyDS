@@ -12,7 +12,6 @@ public class SavePresenter {
     private StorageView storageView;
     private SaveModel saveModel;
     private PagePresenter pagePresenter;
-
     public SavePresenter(SearchView searchView, StorageView storageView, SaveModel saveModel){
         this.searchView = searchView;
         this.storageView = storageView;
@@ -32,7 +31,6 @@ public class SavePresenter {
     private void showTextInStorageView(){
         updateSavedSeriesTextPane();
         updateSeriesComboBox();
-
     }
     public void setPagePresenter(PagePresenter pagePresenter){
         this.pagePresenter = pagePresenter;
@@ -45,7 +43,6 @@ public class SavePresenter {
         storageView.getSavedSeriesTextPane().setCaretPosition(0);
     }
     private void updateSeriesComboBox(){
-        //mejorar lo de pedir al modelo las series.
         storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(saveModel.getSavedSeries()));
         String title = pagePresenter.getLastSelectedResultTitle();
         storageView.getSeriesComboBox().addItem(title);

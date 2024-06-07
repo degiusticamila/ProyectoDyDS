@@ -25,7 +25,7 @@ public class ScorePresenter {
         scoreModel.addListener(new ModelListener() {
             @Override
             public void hasFinished() {
-                    showNewScore(selectedSeries);
+                    showNewScore();
                 }
         });
         actualTitle = pagePresenter.getLastSelectedResultTitle();
@@ -33,32 +33,23 @@ public class ScorePresenter {
         scoreModel.updateScore(actualTitle,score);
         ratedSeries = scoreModel.getRatedSeries();
     }
-    private void showNewScore(SearchResult selectedSeries){
-       updateScoreComboBox();
-       //addRatedSeries(actualRankedSeries);
-        //String date = actualRankedSeries.getLastModificationDateFormatted();
-        //String title = actualRankedSeries.getSeriesTitle();
-        //Integer score = actualRankedSeries.getScore();
-       // scoreView.getRatedSeriesComboBox().addItem(title+" "+ score +" "+ date);
+    private void showNewScore(){
+        createComboBoxRatedSeries();
+        updateScoreComboBox();
+    }
+    private void createComboBoxRatedSeries(){
+        scoreView.getRatedSeriesComboBox().setModel(new DefaultComboBoxModel());
     }
     public void updateScoreComboBox(){
-       scoreView.getRatedSeriesComboBox().setModel(new DefaultComboBoxModel());
-
         ratedSeries = scoreModel.getRatedSeries();
         sortRatedSeries(ratedSeries);
 
         for(RankedSeries rankedSeries : ratedSeries){
             scoreView.getRatedSeriesComboBox().addItem(rankedSeries);
-           // scoreView.getRatedSeriesComboBox().add(rankedSeries.getSeriesTitle(),rankedSeries);
-           // scoreView.getRatedSeriesComboBox().addItem(rankedSeries.getSeriesTitle()+" "+rankedSeries.getScore()+" "+rankedSeries.getLastModificationDateFormatted());
-            //scoreView.getRatedSeriesComboBox().addItem(rankedSeries.toString());
         }
     }
     private void sortRatedSeries(ArrayList<RankedSeries> ratedSeries){
         ratedSeries.sort((rs1, rs2) -> Integer.compare(rs1.getScore(), rs2.getScore()));
-    }
-    private void createRatedSeriesList(){
-        ratedSeries = new ArrayList<>();
     }
     public ArrayList<RankedSeries> getRatedSeries(){
         return ratedSeries;
@@ -68,7 +59,5 @@ public class ScorePresenter {
     }
     public void onEventComboBoxRankSelected(RankedSeries selectedRankedSeries){
         System.out.println("Seleccionaste un elemento rankeado :)");
-        //agregar en el 1er panel.
-        //new modelListener
     }
 }

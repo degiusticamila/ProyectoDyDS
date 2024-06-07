@@ -13,7 +13,6 @@ public class Window extends JFrame {
     public StorageView storageView;
     public ScoreView scoreView;
     private JTabbedPane generalTabbedPane;
-    //private JPanel generalContentPane;
 
     public Window(SearchView searchView, StorageView storageView, ScoreView scoreView){
 
@@ -24,18 +23,13 @@ public class Window extends JFrame {
 
         setTitle("TV Series Info Repo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600); // Define el tamaño de la ventana
-        setLocationRelativeTo(null); // Centra la ventana en la pantalla
-
+        setSize(800, 600);
+        setLocationRelativeTo(null);
     }
     public void createGeneralTabbedPane(){
         generalTabbedPane = new JTabbedPane();
         add(generalTabbedPane);
     }
-    public JTabbedPane getTabbedPane(){
-        return generalTabbedPane;
-    }
-
     public static void main(String[] args) {
         Utilities.setNimbusTheme();
         SwingUtilities.invokeLater(() -> {
@@ -61,17 +55,14 @@ public class Window extends JFrame {
             ScorePresenter scorePresenter = new ScorePresenter(searchView,scoreView,scoreModel);
 
             savePresenter.setPagePresenter(pagePresenter);
-
             storageView.setStoragePresenter(storagePresenter);
             scorePresenter.setPagePresenter(pagePresenter);
             searchPresenter.setScorePresenter(scorePresenter);
-
             searchView.setSearchPresenter(searchPresenter);
             searchView.setPagePresenter(pagePresenter);
             searchView.setSavePresenter(savePresenter);
             searchView.setScorePresenter(scorePresenter);
             scoreView.setScorePresenter(scorePresenter);
-
 
             generalView.setVisible(true);
         });

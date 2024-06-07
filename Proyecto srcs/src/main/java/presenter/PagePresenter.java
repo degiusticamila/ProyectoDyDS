@@ -24,9 +24,10 @@ public class PagePresenter {
             }
         });
         searchView.setWorkingStatus();
-        pageModel.calculateCallForPageResponse(searchResult);
-        searchView.setWatingStatus();
 
+        pageModel.calculateCallForPageResponse(searchResult);
+
+        searchView.setWatingStatus();
     }
     private void showPageResult(SearchResult searchResult){
         Response<String> lastCallForPageResponse = pageModel.getLastPageResponse();
@@ -34,11 +35,7 @@ public class PagePresenter {
         lastSelectedResultTitle = searchResult.title;
         setLastSelectedResultTitle(lastSelectedResultTitle);
 
-       updateSearchView();
-    }
-    private void updateSearchView(){
-        searchView.getCurrentSearchTextPane().setText(lastText);
-        searchView.getCurrentSearchTextPane().setCaretPosition(0);
+        updateSearchView();
     }
     public String getLastText(){
         return lastText;
@@ -48,5 +45,9 @@ public class PagePresenter {
     }
     public void setLastSelectedResultTitle(String lastSelectedResultTitle){
         this.lastSelectedResultTitle = lastSelectedResultTitle;
+    }
+    private void updateSearchView(){
+        searchView.getCurrentSearchTextPane().setText(lastText);
+        searchView.getCurrentSearchTextPane().setCaretPosition(0);
     }
 }
