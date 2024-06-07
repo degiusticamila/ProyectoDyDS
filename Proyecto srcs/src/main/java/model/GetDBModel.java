@@ -14,7 +14,7 @@ public class GetDBModel {
         }
     }
     public void getExtractText(String selectedTitle){
-        lastExtract = DataBase.getExtract(selectedTitle);
+        lastExtract = DataBaseImpl.getExtract(selectedTitle);
         notifyExtractFinished();
     }
     public String getLastExtract(){

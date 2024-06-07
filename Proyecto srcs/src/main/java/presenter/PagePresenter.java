@@ -24,9 +24,7 @@ public class PagePresenter {
             }
         });
         searchView.setWorkingStatus();
-
         pageModel.calculateCallForPageResponse(searchResult);
-
         searchView.setWatingStatus();
     }
     private void showPageResult(SearchResult searchResult){

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import model.DataBase;
+import model.DataBaseImpl;
 import retrofit2.Response;
 
 import javax.swing.*;
@@ -34,7 +34,7 @@ public class Utilities {
 
             SearchResult sr = new SearchResult(searchResultTitle, searchResultPageId, searchResultSnippet);
 
-            String score = DataBase.getScores(searchResultTitle);
+            String score = DataBaseImpl.getScores(searchResultTitle);
 
             Integer scoreValue = Integer.parseInt(score);
 

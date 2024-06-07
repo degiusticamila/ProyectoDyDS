@@ -3,7 +3,7 @@ package model;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DataBase {
+public class DataBaseImpl {
 
   public static void loadDatabase() {
     String url = "jdbc:sqlite:./dictionary.db";

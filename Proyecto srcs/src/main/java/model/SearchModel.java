@@ -10,8 +10,9 @@ import java.util.ArrayList;
 public class SearchModel{
     private WikipediaSearchAPI searchAPI;
     private Response<String> callForSearchResponse;
-    private ArrayList<ModelListener> listeners = new ArrayList<>();
+    private ArrayList<ModelListener> listeners;
     public SearchModel(WikipediaSearchAPI searchAPI){
+        listeners = new ArrayList<>();
         this.searchAPI = searchAPI;
     }
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class DeleteDBModel {
     private ArrayList<ModelListener> deleteListeners = new ArrayList<>();
     public void deleteItem(String titleSelectToDelete){
-        DataBase.deleteEntry(titleSelectToDelete);
+        DataBaseImpl.deleteEntry(titleSelectToDelete);
         notifyPageFinishedListener();
     }
     private void notifyPageFinishedListener(){

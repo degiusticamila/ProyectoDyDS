@@ -5,7 +5,6 @@ import presenter.*;
 import utils.Utilities;
 
 import javax.swing.*;
-import java.util.Date;
 
 
 public class Window extends JFrame {
@@ -33,7 +32,7 @@ public class Window extends JFrame {
     public static void main(String[] args) {
         Utilities.setNimbusTheme();
         SwingUtilities.invokeLater(() -> {
-            DataBase.loadDatabase();
+            DataBaseImpl.loadDatabase();
 
             SearchView searchView = new SearchView();
             StorageView storageView = new StorageView();

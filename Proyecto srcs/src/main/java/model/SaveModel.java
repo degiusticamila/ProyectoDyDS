@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class SaveModel {
     private ArrayList<ModelListener> dataBaseListeners = new ArrayList<>();
     public void saveLocally(String selectedResultTitle,String text){
-        DataBase.saveInfo(selectedResultTitle.replace("'", "`"), text);  //Dont forget the ' sql problem
+        DataBaseImpl.saveInfo(selectedResultTitle.replace("'", "`"), text);  //Dont forget the ' sql problem
         notifySaveLocallyFinished();
     }
     public Object[] getSavedSeries(){
         Object[] savedSeriesArray;
-        savedSeriesArray = DataBase.getTitles().stream().sorted().toArray();
+        savedSeriesArray = DataBaseImpl.getTitles().stream().sorted().toArray();
         return savedSeriesArray;
     }
     public void addListener(ModelListener listener) {
