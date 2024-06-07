@@ -31,7 +31,6 @@ public class StoragePresenter {
         storageView.setWorkingStatus();
         dbModel.getExtractText(selectedTitle);
         storageView.setWatingStatus();
-
     }
     public void showSavedSeries(){
         storageView.getSeriesComboBox().setModel(new DefaultComboBoxModel(saveModel.getSavedSeries()));

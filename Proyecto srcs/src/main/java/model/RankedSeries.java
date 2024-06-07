@@ -8,7 +8,6 @@ public class RankedSeries extends JMenuItem {
     private String seriesTitle;
     private Integer score;
     private Date lastModificationDate;
-
     public RankedSeries(String seriesTitle, Integer score){
         this.seriesTitle = seriesTitle;
         setScore(score);
@@ -29,9 +28,6 @@ public class RankedSeries extends JMenuItem {
     }
     public Integer getScore(){
         return score;
-    }
-    public String getSeriesTitle(){
-        return seriesTitle;
     }
     @Override
     public String toString() {

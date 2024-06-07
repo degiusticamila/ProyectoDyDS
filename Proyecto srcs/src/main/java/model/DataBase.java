@@ -71,7 +71,6 @@ public class DataBase {
       Statement statement = connection.createStatement();
       statement.setQueryTimeout(30);
 
-      System.out.println("INSERT  " + title + "', '"+ extract);
 
       statement.executeUpdate("replace into catalog values(null, '"+ title + "', '"+ extract + "', 1)");
     }
@@ -124,10 +123,8 @@ public class DataBase {
     }
     return null;
   }
-
   public static void deleteEntry(String title)
   {
-
     Connection connection = null;
     try
     {
