@@ -8,15 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SearchModel{
-    //private WikipediaSearchAPI searchAPI;
     private SearchExecutor searchExecutor;
     private Response<String> callForSearchResponse;
     private ArrayList<ModelListener> listeners;
-   /** public SearchModel(WikipediaSearchAPI searchAPI){
-        listeners = new ArrayList<>();
-        this.searchAPI = searchAPI;
-    }
-    **/
+
    public SearchModel(SearchExecutor searchExecutor){
        listeners = new ArrayList<>();
        this.searchExecutor = searchExecutor;
@@ -24,13 +19,6 @@ public class SearchModel{
     public void searchInWikipedia(String termToSearch){
         callForSearchResponse = searchExecutor.executeSearch(termToSearch);
         notifySearchFinishedListener();
-       /** try {
-            callForSearchResponse = searchAPI.searchForTerm(termToSearch + " (Tv series) articletopic:\"television\"").execute();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        notifySearchFinishedListener();
-        **/
     }
     public Response<String> getLastSearchResponse(){
         return callForSearchResponse;

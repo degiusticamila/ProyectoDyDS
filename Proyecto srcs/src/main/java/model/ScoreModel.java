@@ -27,6 +27,7 @@ public class ScoreModel {
 
         ratedTitleArray = database.getTitlesScores().stream().sorted().toArray();
         ratedSeriesModel = new ArrayList<>();
+
         for(Object obj: ratedTitleArray){
             String score = database.getScores((String) obj);
             Integer parseScore = Integer.parseInt(score);
